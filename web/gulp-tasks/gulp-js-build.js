@@ -39,6 +39,7 @@ gulp.task('watch', function() {
 	gulp.watch(config.dataDir + '/**/*.json', ['jsondata']);
 	gulp.watch(config.fontsDir + '/**/*', ['fonts']);
 	gulp.watch(config.imagesDir + '/**/*', ['images']);
+	gulp.watch(config.sourceDir + '/index.html', ['html']);
 });
 
 module.exports = function() {
