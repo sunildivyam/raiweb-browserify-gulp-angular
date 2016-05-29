@@ -1,6 +1,6 @@
 # raiweb-browserify-gulp-angular
 ## Gulp Tasks:
-	### browserify
+### browserify ###
 	Gulp task "browserify" uses 'index.js' as entry point and
 	concatinates all dependencies and sub dependencies of index.js
 	and generates "target/index.js"
