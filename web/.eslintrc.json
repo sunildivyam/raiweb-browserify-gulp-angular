@@ -1,0 +1,19 @@
+{
+    "env": {
+        "es6": false,
+        "browser": true,
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 5,
+        "sourceType": "script"
+    },
+    "rules": {
+        "semi": 2,
+        "no-console": 0
+    },
+    "globals": {
+
+    },
+    "extends": "defaults"
+}
