@@ -1,2 +1,2 @@
 'use strict';
-require('./gulp-tasks/gulp-js-build');
+require('./js-build/js-build');
