@@ -8,18 +8,18 @@ var config = pkg.config;
 config.name = pkg.name;
 config.main = pkg.main;
 
-require('./connect')(gulp, config);
-require('./lint')(gulp, config);
-require('./ngTemplateCache')(gulp, config);
-require('./browserify')(gulp, config);
-require('./html')(gulp, config);
-require('./jsondata')(gulp, config);
-require('./fonts')(gulp, config);
-require('./images')(gulp, config);
-require('./less')(gulp, config);
-require('./uglify')(gulp, config);
-require('./cleanCss')(gulp, config);
-require('./clean')(gulp, config);
+require('./tasks/connect')(gulp, config);
+require('./tasks/lint')(gulp, config);
+require('./tasks/ngTemplateCache')(gulp, config);
+require('./tasks/browserify')(gulp, config);
+require('./tasks/html')(gulp, config);
+require('./tasks/jsondata')(gulp, config);
+require('./tasks/fonts')(gulp, config);
+require('./tasks/images')(gulp, config);
+require('./tasks/less')(gulp, config);
+require('./tasks/uglify')(gulp, config);
+require('./tasks/cleanCss')(gulp, config);
+require('./tasks/clean')(gulp, config);
 
 gulp.task('buildjs', function() {
 	return runSequence('ngTemplateCache', 'browserify', 'cleanNgTemplateCache');
