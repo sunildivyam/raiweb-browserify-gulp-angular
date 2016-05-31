@@ -9,7 +9,7 @@ var eslint = require('gulp-eslint');
 
 module.exports = function(gulp, config) {
 	gulp.task('lint', function() {
-		gulp.src([config.sourceDir + '/**/*.{js, json}', '!node_modules/**'])
+		gulp.src([config.sourceDir + '/**/*.{js, json}', '!node_modules/**','!' + config.sourceDir + '/templates/*.js'])
 		.pipe(eslint())
 		.pipe(eslint.format())
 		.pipe(eslint.failAfterError());
