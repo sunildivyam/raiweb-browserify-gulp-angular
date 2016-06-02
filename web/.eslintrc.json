@@ -13,7 +13,8 @@
         "no-console": 0
     },
     "globals": {
-
+        "angular": "angular",
+        "$": "jQuery"
     },
     "extends": "defaults"
 }

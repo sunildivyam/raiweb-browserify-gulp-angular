@@ -26,15 +26,17 @@ gulp.task('buildjs', function() {
 });
 
 gulp.task('compile', function() {
-	return runSequence('lint', ['buildjs', 'html', 'fonts', 'jsondata', 'images', 'less']);
+	return runSequence('lint', 'buildjs', ['html', 'fonts', 'jsondata', 'images', 'less']);
 });
 
 gulp.task('package', function() {
-	return runSequence('clean', 'compile', ['uglify', 'cleanCss']);
+	return runSequence('clean', 'lint', 'ngTemplateCache', 'browserify', 'cleanNgTemplateCache', ['html', 'fonts', 'jsondata', 'images', 'less'], ['uglify', 'cleanCss']);
 });
 
 gulp.task('watch', function() {
-	gulp.watch([config.sourceDir + '/**/*.js', config.sourceDir + '/pages/**/*.html'], ['buildjs']);
+	gulp.watch([config.sourceDir + '/**/*.js', config.sourceDir + '/pages/**/*.html'], function() {
+		runSequence('ngTemplateCache', 'browserify', 'cleanNgTemplateCache');
+	});
 	gulp.watch(config.stylesDir + '/**/*.less', ['less']);
 	gulp.watch(config.dataDir + '/**/*.json', ['jsondata']);
 	gulp.watch(config.fontsDir + '/**/*', ['fonts']);
