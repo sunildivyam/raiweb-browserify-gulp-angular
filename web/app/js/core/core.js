@@ -13,7 +13,10 @@
 		$urlRouterProvider.otherwise('/home');
 
 		// Enables html5Mode Urls
-		$locationProvider.html5Mode(true);
+		$locationProvider.html5Mode({
+			enabled: true,
+			requireBase: false
+		});
 
 		/*
 		*	Description
@@ -107,18 +110,13 @@
 	*	should be required here and defined in raiweb.core module
 	*/
 
-	var appService = require('./services/appService');
-	var pageTitleService = require('./services/pageTitleService');
-	var metaInformationService = require('./services/metaInformationService');
-	var appController = require('./controllers/appController');
-	var appHeader = require('./directives/appHeader');
-
 	angular.module('raiweb.core')
-	.factory(appService.name, appService)
-	.factory(pageTitleService.name, pageTitleService)
-	.factory(metaInformationService.name, metaInformationService)
-	.controller(appController.name, appController)
-	.directive(appHeader.name, appHeader);
+	.factory('appService', require('./services/appService'))
+	.factory('pageTitleService', require('./services/pageTitleService'))
+	.factory('metaInformationService', require('./services/metaInformationService'))
+	.factory('appHeaderService', require('./services/appHeaderService'))
+	.controller('appController', require('./controllers/appController'))
+	.directive('appHeader', require('./directives/appHeader'));
 
 	module.exports = angular.module('raiweb.core');
 })();

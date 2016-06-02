@@ -1,13 +1,15 @@
 'use strict';
 /*
-*	appService
+*	appHeaderService
 *	Description
-*	appService fetches the Application Level Data.
+*	appHeaderService fetches the Application's Header Information.
+*	This may include:
+*	Logo, Menu items, Featured Links, Social media Links, Copyrights Information etc.
 */
 
 (function() {
-	var appService = function($q, $http) {
-		var url = 'app/data/app-header.json';
+	var appHeaderService = function($q, $http) {
+		var url = 'data/app-header.json';
 		var headerInfo = null;
 
 		function getAppHeaderInfo() {
@@ -37,6 +39,6 @@
 		};
 	};
 
-	appService.$inject = ['$q', '$http'];
-	module.exports = appService;
+	appHeaderService.$inject = ['$q', '$http'];
+	module.exports = appHeaderService;
 })();

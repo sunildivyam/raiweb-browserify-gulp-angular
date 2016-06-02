@@ -1,12 +1,12 @@
 'use strict';
 /*
-*	appService
+*	aboutusService
 *	Description
-*	appService fetches the Application Level Data.
+*	aboutusService fetches the aboutus Page Level Data.
 */
 
 (function() {
-	var appService = function($q, $http) {
+	var aboutusService = function($q, $http) {
 		var url = 'app/data/app-header.json';
 		var headerInfo = null;
 
@@ -37,6 +37,6 @@
 		};
 	};
 
-	appService.$inject = ['$q', '$http'];
-	module.exports = appService;
+	aboutusService.$inject = ['$q', '$http'];
+	module.exports = aboutusService;
 })();

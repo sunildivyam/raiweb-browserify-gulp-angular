@@ -1,0 +1,47 @@
+{
+	"logo": {
+		"primaryTitle": "Logo Title",
+		"secondaryTitle": "Logo Secondary Title",
+		"tagLine": "This is Tag Line",
+		"highCharIndex": 5
+	},
+	"navs": [
+		{
+			"id": "home",
+			"name": "Home",
+			"href": "#home",
+			"title": "Home Page"
+		},
+		{
+			"id": "services",
+			"name": "Services",
+			"href": "#services",
+			"title": "Services Page",
+			"navs": [
+				{
+					"id": "service1",
+					"name": "Service 1",
+					"href": "#service1",
+					"title": "Service 1 Page"
+				},
+				{
+					"id": "service2",
+					"name": "Service 2",
+					"href": "#service2",
+					"title": "Service 2 Page"
+				}
+			]
+		},
+		{
+			"id": "portfolio",
+			"name": "Portfolio",
+			"href": "#portfolio",
+			"title": "Portfolio Page"
+		},{
+			"id": "aboutus",
+			"name": "About us",
+			"href": "#aboutus",
+			"title": "About us Page"
+		}
+	]
+}

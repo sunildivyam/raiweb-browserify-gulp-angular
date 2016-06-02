@@ -1,12 +1,12 @@
 'use strict';
 /*
-*	appService
+*	teamService
 *	Description
-*	appService fetches the Application Level Data.
+*	teamService fetches the team Page Level Data.
 */
 
 (function() {
-	var appService = function($q, $http) {
+	var teamService = function($q, $http) {
 		var url = 'app/data/app-header.json';
 		var headerInfo = null;
 
@@ -37,6 +37,6 @@
 		};
 	};
 
-	appService.$inject = ['$q', '$http'];
-	module.exports = appService;
+	teamService.$inject = ['$q', '$http'];
+	module.exports = teamService;
 })();

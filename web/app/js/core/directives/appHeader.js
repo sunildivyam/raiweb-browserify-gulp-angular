@@ -2,11 +2,11 @@
 (function() {
 	var appHeader = function() {
 		return {
-			restrict: 'A',
+			restrict: 'E',
 			replace: true,
 			scope: {
-				'logo': '=',
-				'navs': '='
+				logo: '=',
+				navs: '='
 			},
 			templateUrl: 'core/app-header.html',
 			link: function() {

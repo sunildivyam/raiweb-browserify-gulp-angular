@@ -1,12 +1,12 @@
 'use strict';
 /*
-*	appService
+*	servicesService
 *	Description
-*	appService fetches the Application Level Data.
+*	servicesService fetches the Services page Level Data.
 */
 
 (function() {
-	var appService = function($q, $http) {
+	var servicesService = function($q, $http) {
 		var url = 'app/data/app-header.json';
 		var headerInfo = null;
 
@@ -37,6 +37,6 @@
 		};
 	};
 
-	appService.$inject = ['$q', '$http'];
-	module.exports = appService;
+	servicesService.$inject = ['$q', '$http'];
+	module.exports = servicesService;
 })();
