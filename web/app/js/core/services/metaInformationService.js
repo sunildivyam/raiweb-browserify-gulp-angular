@@ -33,12 +33,15 @@
 		*/
 
 		function appendMetaKeywords(keywords) {
+			var lastSeparator = '';
+			if (metaKeywords !== '') {
+				lastSeparator = ',';
+			}
+
 			if (typeof keywords === 'string') {
-				metaKeywords += ', ' + keywords;
+				metaKeywords += lastSeparator + keywords;
 			} else if(keywords instanceof Array) {
-				for (var key in keywords) {
-					metaKeywords += ', ' + keywords[key];
-				}
+				metaKeywords += lastSeparator + keywords.join(',');
 			} else {
 				metaKeywords = '';
 			}

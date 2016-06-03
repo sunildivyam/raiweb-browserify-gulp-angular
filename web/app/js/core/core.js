@@ -14,7 +14,7 @@
 
 		// Enables html5Mode Urls
 		$locationProvider.html5Mode({
-			enabled: true,
+			enabled: false,
 			requireBase: false
 		});
 
@@ -34,7 +34,7 @@
 
 		$stateProvider.state({
 			name: 'home',
-			url: '/',
+			url: '/home',
 			templateProvider: ['$templateCache', function($templateCache) {
 				return $templateCache.get('home/landing.html');
 			}],

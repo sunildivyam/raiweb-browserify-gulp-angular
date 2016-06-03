@@ -1,4 +1,11 @@
 {
+	"application": {
+		"name": "raiweb",
+		"title": "raiweb Application title",
+		"shortTitle": "RAIWEB | ",
+		"description": "Application Description",
+		"keywords": ["raiweb", "keyword1", "keyword2", "keyword3", "keyword4"]
+	},
 	"logo": {
 		"primaryTitle": "Logo Title",
 		"secondaryTitle": "Logo Secondary Title",
@@ -10,38 +17,64 @@
 			"id": "home",
 			"name": "Home",
 			"href": "#home",
-			"title": "Home Page"
+			"title": "Home Page",
+			"visible": true,
+			"description": "Home Page Description",
+			"keywords": ["raiweb-home", "keyword1", "keyword2", "keyword3", "keyword4"]
 		},
 		{
 			"id": "services",
-			"name": "Services",
+			"name": "Our Services",
 			"href": "#services",
 			"title": "Services Page",
+			"visible": true,
 			"navs": [
 				{
 					"id": "service1",
 					"name": "Service 1",
 					"href": "#service1",
-					"title": "Service 1 Page"
+					"title": "Service 1 Page",
+					"visible": true,
+					"description": "Service 1 Page Description",
+					"keywords": ["raiweb-Service1", "keyword1", "keyword2", "keyword3", "keyword4"]
 				},
 				{
 					"id": "service2",
 					"name": "Service 2",
 					"href": "#service2",
-					"title": "Service 2 Page"
+					"title": "Service 2 Page",
+					"visible": true,
+					"description": "Service 2 Page Description",
+					"keywords": ["raiweb-Service2", "keyword1", "keyword2", "keyword3", "keyword4"]
 				}
 			]
 		},
 		{
 			"id": "portfolio",
-			"name": "Portfolio",
+			"name": "Our Portfolio",
 			"href": "#portfolio",
-			"title": "Portfolio Page"
-		},{
+			"title": "Portfolio Page",
+			"visible": true,
+			"description": "Portfolio Page Description",
+			"keywords": ["raiweb-Portfolio", "keyword1", "keyword2", "keyword3", "keyword4"]
+		},
+		{
 			"id": "aboutus",
-			"name": "About us",
+			"name": "How we work",
 			"href": "#aboutus",
-			"title": "About us Page"
+			"title": "About us Page",
+			"visible": true,
+			"description": "About us Page Description",
+			"keywords": ["raiweb-aboutus", "keyword1", "keyword2", "keyword3", "keyword4"]
+		},
+		{
+			"id": "contactus",
+			"name": "Reach us",
+			"href": "#contactus",
+			"title": "Reach us Page",
+			"visible": true,
+			"description": "Reach us Page Description",
+			"keywords": ["raiweb-contactus", "keyword1", "keyword2", "keyword3", "keyword4"]
 		}
 	]
 }

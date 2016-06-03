@@ -18,7 +18,11 @@
 		// fetches the Application Header information
 		appHeaderService.getAppHeaderInfo().then(function(data) {
 			setAppHeader(data);
-
+			setMetaInformation({
+				keywords: data.application.keywords,
+				description: data.application.description,
+				title: data.application.shortTitle
+			});
 		}, function() {
 			setAppHeader(false);	// resets the Header Information
 		});
@@ -40,6 +44,23 @@
 					logo: null,
 					navs: null
 				};
+			}
+		}
+
+		/*
+		*	setMetaInformation is a private method
+		*	It takes an Object param, and sets the following meta Information of Page:
+		*	keywords, description and page Title
+		*/
+		function setMetaInformation(metaInfo) {
+			if (metaInfo instanceof Object) {
+				metaInformationService.reset();
+				metaInformationService.appendMetaKeywords(metaInfo.keywords);
+				metaInformationService.setMetaDescription(metaInfo.description);
+				pageTitleService.setPageTitle(metaInfo.title);
+			} else {
+				metaInformationService.reset();
+				pageTitleService.setPageTitle();
 			}
 		}
 	};
