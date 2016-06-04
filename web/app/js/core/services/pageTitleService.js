@@ -21,8 +21,8 @@
 		}
 
 		return {
-			getTitle: getPageTitle,
-			setTitle: setPageTitle
+			getPageTitle: getPageTitle,
+			setPageTitle: setPageTitle
 		};
 	};
 

@@ -111,12 +111,14 @@
 	*/
 
 	angular.module('raiweb.core')
+	.factory('responsiveDetectionService', require('./services/responsiveDetectionService'))
 	.factory('appService', require('./services/appService'))
 	.factory('pageTitleService', require('./services/pageTitleService'))
 	.factory('metaInformationService', require('./services/metaInformationService'))
 	.factory('appHeaderService', require('./services/appHeaderService'))
 	.controller('appController', require('./controllers/appController'))
-	.directive('appHeader', require('./directives/appHeader'));
+	.directive('appHeader', require('./directives/appHeader'))
+	.directive('brandLogo', require('./directives/brandLogo'));
 
 	module.exports = angular.module('raiweb.core');
 })();

@@ -1,5 +1,7 @@
 'use strict';
 var angular = require('angular');
+require('angular-sanitize');
+
 window.$ = require('jquery');
 window.jQuery = window.$;
 require('bootstrap');
@@ -11,6 +13,7 @@ require('./templates/templates');
 angular.module('raiweb', [
 	'ui.router',
 	'templates',
+	'ngSanitize',
 	require('./js/core/core').name,
 	require('./js/home/home').name,
 	require('./js/services/services').name,

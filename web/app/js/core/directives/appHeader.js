@@ -1,6 +1,6 @@
 'use strict';
 (function() {
-	var appHeader = function() {
+	var appHeader = function($rootScope) {
 		return {
 			restrict: 'E',
 			replace: true,
@@ -9,12 +9,18 @@
 				navs: '='
 			},
 			templateUrl: 'core/app-header.html',
-			link: function() {
+			link: function($scope) {
+				$scope.logoSize = $rootScope.currentBreakpoint;
 
+				$rootScope.$watch('currentBreakpoint', function(newValue, oldValue) {
+					if (newValue && newValue !== oldValue) {
+						$scope.logoSize = newValue;
+					}
+				});
 			}
 		};
 	};
 
-	appHeader.$inject = [];
+	appHeader.$inject = ['$rootScope'];
 	module.exports = appHeader;
 })();

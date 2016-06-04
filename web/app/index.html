@@ -7,7 +7,7 @@
     <meta name="description" content="{{ metaInformationService.getMetaDescription() }}">
     <meta name="keywords" content="{{ metaInformationService.getMetaKeywords() }}">
 
-    <title>{{pageTitleService.getPageTitle()}}</title>
+    <title ng-bind="pageTitleService.getPageTitle()"></title>
 
     <link href="styles/main.css" rel="stylesheet">
 
