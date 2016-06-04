@@ -7,17 +7,18 @@
 		"keywords": ["raiweb", "keyword1", "keyword2", "keyword3", "keyword4"]
 	},
 	"logo": {
-		"primaryTitle": "Logo Title",
-		"secondaryTitle": "Logo Secondary Title",
-		"tagLine": "This is Tag Line",
+		"primaryTitle": "Microsoft",
+		"secondaryTitle": "India",
+		"tagLine": "Software and Website development Brand",
 		"highCharIndex": 5
 	},
 	"navs": [
 		{
 			"id": "home",
 			"name": "Home",
-			"href": "#home",
+			"templateUrl": "home/landing.html",
 			"title": "Home Page",
+			"controllerName": "homeController",
 			"visible": true,
 			"description": "Home Page Description",
 			"keywords": ["raiweb-home", "keyword1", "keyword2", "keyword3", "keyword4"]
@@ -25,14 +26,15 @@
 		{
 			"id": "services",
 			"name": "Our Services",
-			"href": "#services",
+			"templateUrl": "services/landing.html",
 			"title": "Services Page",
+			"controllerName": "servicesController",
 			"visible": true,
 			"navs": [
 				{
 					"id": "service1",
 					"name": "Service 1",
-					"href": "#service1",
+					"templateUrl": "services/service1.html",
 					"title": "Service 1 Page",
 					"visible": true,
 					"description": "Service 1 Page Description",
@@ -41,7 +43,7 @@
 				{
 					"id": "service2",
 					"name": "Service 2",
-					"href": "#service2",
+					"templateUrl": "services/service2.html",
 					"title": "Service 2 Page",
 					"visible": true,
 					"description": "Service 2 Page Description",
@@ -52,8 +54,9 @@
 		{
 			"id": "portfolio",
 			"name": "Our Portfolio",
-			"href": "#portfolio",
+			"templateUrl": "portfolio/landing.html",
 			"title": "Portfolio Page",
+			"controllerName": "portfolioController",
 			"visible": true,
 			"description": "Portfolio Page Description",
 			"keywords": ["raiweb-Portfolio", "keyword1", "keyword2", "keyword3", "keyword4"]
@@ -61,8 +64,9 @@
 		{
 			"id": "aboutus",
 			"name": "How we work",
-			"href": "#aboutus",
+			"templateUrl": "aboutus/landing.html",
 			"title": "About us Page",
+			"controllerName": "aboutusController",
 			"visible": true,
 			"description": "About us Page Description",
 			"keywords": ["raiweb-aboutus", "keyword1", "keyword2", "keyword3", "keyword4"]
@@ -70,8 +74,9 @@
 		{
 			"id": "contactus",
 			"name": "Reach us",
-			"href": "#contactus",
+			"templateUrl": "contactus/landing.html",
 			"title": "Reach us Page",
+			"controllerName": "contactusController",
 			"visible": true,
 			"description": "Reach us Page Description",
 			"keywords": ["raiweb-contactus", "keyword1", "keyword2", "keyword3", "keyword4"]

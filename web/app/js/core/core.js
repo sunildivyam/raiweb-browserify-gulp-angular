@@ -7,8 +7,14 @@
 	*	and other core level configurations if any
 	*/
 
+	/* 	This is $stateProviderRef variable and is used to create All States Dynamically
+	*	from appHeaderService fetched nav data
+	*/
+	var $stateProviderRef;
+
 	angular.module('raiweb.core', [])
 	.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+		$stateProviderRef = $stateProvider;
 		// Any invalid Url will redirect to "/home" url
 		$urlRouterProvider.otherwise('/home');
 
@@ -17,6 +23,17 @@
 			enabled: false,
 			requireBase: false
 		});
+
+
+	}])
+	/*
+	*	Description
+	*	Run method of core module, makes the $state and $stateParams Service, available
+	*	to the $rootScope Service
+	*/
+	.run(['$state', '$stateParams', '$rootScope', 'appHeaderService', function($state, $stateParams, $rootScope, appHeaderService) {
+		$rootScope.$state = $state;
+		$rootScope.$stateParams = $stateParams;
 
 		/*
 		*	Description
@@ -32,71 +49,36 @@
 		* 	articles
 		*/
 
-		$stateProvider.state({
-			name: 'home',
-			url: '/home',
-			templateProvider: ['$templateCache', function($templateCache) {
-				return $templateCache.get('home/landing.html');
-			}],
-			controller: 'homeController'
-		})
-		.state({
-			name: 'services',
-			url: '/services',
-			templateProvider: ['$templateCache', function($templateCache) {
-				return $templateCache.get('services/landing.html');
-			}],
-			controller: 'servicesController'
-		})
-		.state({
-			name: 'portfolio',
-			url: '/portfolio',
-			templateProvider: ['$templateCache', function($templateCache) {
-				return $templateCache.get('portfolio/landing.html');
-			}],
-			controller: 'portfolioController'
-		})
-		.state({
-			name: 'aboutus',
-			url: '/how-we-work',
-			templateProvider: ['$templateCache', function($templateCache) {
-				return $templateCache.get('aboutus/landing.html');
-			}],
-			controller: 'aboutusController'
-		})
-		.state({
-			name: 'contactus',
-			url: '/contact-us',
-			templateProvider: ['$templateCache', function($templateCache) {
-				return $templateCache.get('contactus/landing.html');
-			}],
-			controller: 'contactusController'
-		})
-		.state({
-			name: 'team',
-			url: '/team',
-			templateProvider: ['$templateCache', function($templateCache) {
-				return $templateCache.get('team/landing.html');
-			}],
-			controller: 'teamController'
-		})
-		.state({
-			name: 'articles',
-			url: '/articles',
-			templateProvider: ['$templateCache', function($templateCache) {
-				return $templateCache.get('articles/landing.html');
-			}],
-			controller: 'articlesController'
+		appHeaderService.getAppHeaderInfo().then(function(data) {
+			var navs = data && data.navs;
+			createStates(navs);
+		}, function() {
+
 		});
-	}])
-	/*
-	*	Description
-	*	Run method of core module, makes the $state and $stateParams Service, available
-	*	to the $rootScope Service
-	*/
-	.run(['$state', '$stateParams', '$rootScope', function($state, $stateParams, $rootScope) {
-		$rootScope.$state = $state;
-		$rootScope.$stateParams = $stateParams;
+
+		function createStates(navs, parentStateName) {
+			if (!(navs instanceof Array)) {
+				return;
+			}
+
+			navs.filter(function(navItem) {
+				var stateName = parentStateName ? parentStateName + '.' + navItem.id : navItem.id;
+				var state = {
+					name: stateName,
+					url: '/' + navItem.id,
+					templateProvider: ['$templateCache', function($templateCache) {
+						return $templateCache.get(navItem.templateUrl);
+					}]
+				};
+
+				if (navItem.controllerName) {
+					state.controller = navItem.controllerName;
+				}
+
+				$stateProviderRef.state(state);
+				createStates(navItem.navs, stateName);
+			});
+		}
 	}]);
 
 	/*

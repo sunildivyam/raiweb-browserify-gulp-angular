@@ -14,7 +14,8 @@
     },
     "globals": {
         "angular": "angular",
-        "$": "jQuery"
+        "$": "jQuery",
+        "$stateProviderM": "$stateProviderM"
     },
     "extends": "defaults"
 }
