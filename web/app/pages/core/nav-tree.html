@@ -1,0 +1,10 @@
+
+<a ui-sref="{{nav.stateName}}" ng-class="{'dropdown-toggle': nav.navs}"
+data-toggle="{{nav.navs?'dropdown':''}}" title="{{nav.title}}">
+	<span  ng-bind="nav.name"></span>
+	<span class="caret" ng-if="nav.navs"></span>
+</a>
+<ul class="dropdown-menu" ng-if="nav.navs">
+	<li ng-repeat="nav in nav.navs | filter: visible=true" ng-include="'core/nav-tree.html'" ng-class="{'dropdown dropdown-submenu': nav.navs}">
+	</li>
+</ul>

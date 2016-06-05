@@ -19,16 +19,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="raiweb-navbar-collapse">
       <ul class="nav navbar-nav">
-        <li ng-class="{'dropdown': navL1.navs}" ng-repeat="navL1 in navs | filter: visible=true" >
-          <a ui-sref="{{navL1.id}}" data-toggle="{{navL1.navs?'dropdown':''}}" title="{{navL1.title}}">
-          <span  ng-bind="navL1.name"></span>
-          <span class="caret" ng-if="navL1.navs"></span>
-          </a>
-          <ul class="dropdown-menu" ng-show="navL1.navs">
-            <li ng-repeat="navL2 in navL1.navs | filter: visible=true">
-              <a ui-sref="{{navL2.id}}" ng-bind="navL2.name" title="{{navL2.title}}"></a>
-            </li>
-          </ul>
+        <li ng-class="{'dropdown': nav.navs}" ng-repeat="nav in navs | filter: visible=true" ng-include="'core/nav-tree.html'">
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->
