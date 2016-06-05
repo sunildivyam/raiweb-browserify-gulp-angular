@@ -67,6 +67,11 @@
             }
         }
 
+        /*
+        *   setCurrentBreakpoint is a private method
+        *   sets the current bootstrap breakpoint, on load or resize of the window.
+        *   The responsiveDetectionService gives the current breakpoint based on the current window size
+        */
         function setCurrentBreakpoint() {
             $rootScope.currentBreakpoint = responsiveDetectionService.getCurrentBreakpoint();
             if (!$rootScope.$$phase) {

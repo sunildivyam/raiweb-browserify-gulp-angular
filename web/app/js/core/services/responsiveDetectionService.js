@@ -2,7 +2,8 @@
 /*
 *   responsiveDetectionService Service
 *   Description
-*   responsiveDetectionService Service Privides Page Titles to the Application
+*   responsiveDetectionService Service provides current bootstrap breakpoint
+*   based on the current window size
 */
 (function() {
     var responsiveDetectionService = function($window) {

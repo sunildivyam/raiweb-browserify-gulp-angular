@@ -37,16 +37,9 @@
 
 		/*
 		*	Description
-		*	All States configuration using $stateProvider.
+		*	All States configuration using $stateProviderRef, a reference to the $stateProvider service.
 		*	All templates are loaded using $templateCache Service
-		*	The 1st Level States are:
-		* 	home
-		* 	services
-		* 	portfolio
-		* 	aboutus
-		* 	contactus
-		* 	team
-		* 	articles
+		*	All States configurations are loaded dynamically using appHeaderService ($http) in JSON format
 		*/
 
 		appHeaderService.getAppHeaderInfo().then(function(data) {
@@ -56,6 +49,12 @@
 
 		});
 
+		/*
+		*	createStates is a private method
+		*	Description:
+		*	createStates method is a recursive method, which recursively iterates through the navs tree and
+		*	creates the corresponding states.
+		*/
 		function createStates(navs, parentStateName) {
 			if (!(navs instanceof Array)) {
 				return;

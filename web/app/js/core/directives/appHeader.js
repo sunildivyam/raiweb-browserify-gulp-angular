@@ -1,4 +1,13 @@
 'use strict';
+/*
+*	appHeader
+*	Description
+*	appHeader directive is responsible for loading and painting Application Header
+*	from its Html template
+*	This may include:
+*	Logo, Menu items, Featured Links, Social media Links, Copyrights Information etc.
+*/
+
 (function() {
 	var appHeader = function($rootScope) {
 		return {
