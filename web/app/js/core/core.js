@@ -13,7 +13,17 @@
     var $stateProviderRef;
 
     angular.module('raiweb.core', [])
-    .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider',
+        function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+        // Error Page State Definition. All other states are created in Run section of this module
+        $stateProvider.state({
+            name: 'error',
+            url: '/error',
+            templateProvider: ['$templateCache', function($templateCache) {
+                return $templateCache.get('core/error.html');
+            }]
+        });
+
         $stateProviderRef = $stateProvider;
         // Any invalid Url will redirect to "/home" url
         $urlRouterProvider.otherwise('/home');
@@ -24,7 +34,7 @@
             requireBase: false
         });
 
-
+        $httpProvider.interceptors.push('requestInterceptor');
     }])
     /*
     *   Description
@@ -158,6 +168,7 @@
     */
 
     angular.module('raiweb.core')
+    .factory('requestInterceptor', require('./services/requestInterceptor'))
     .factory('responsiveDetectionService', require('./services/responsiveDetectionService'))
     .factory('appService', require('./services/appService'))
     .factory('pageTitleService', require('./services/pageTitleService'))
