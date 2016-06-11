@@ -210,7 +210,8 @@
     .factory('appHeaderService', require('./services/appHeaderService'))
     .controller('appController', require('./controllers/appController'))
     .directive('appHeader', require('./directives/appHeader'))
-    .directive('brandLogo', require('./directives/brandLogo'));
+    .directive('brandLogo', require('./directives/brandLogo'))
+    .directive('bootstrapCarousel', require('./directives/bootstrapCarousel'));
 
     module.exports = angular.module('raiweb.core');
 })();
