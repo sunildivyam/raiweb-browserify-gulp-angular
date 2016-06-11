@@ -36,6 +36,7 @@
     "targetDir": "target",
     "sourceDir": "app",
     "fontsDir": "fonts",
+    "bootstrapFontsDir": "node_modules/bootstrap/fonts",
     "imagesDir": "images",
     "pagesSourceDir": "app/pages",
     "dataDir": "data",
