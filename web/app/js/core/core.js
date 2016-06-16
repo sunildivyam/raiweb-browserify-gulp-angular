@@ -207,6 +207,7 @@
     .factory('appService', require('./services/appService'))
     .factory('pageTitleService', require('./services/pageTitleService'))
     .factory('metaInformationService', require('./services/metaInformationService'))
+    .factory('technologiesService', require('./services/technologiesService'))
     .factory('appHeaderService', require('./services/appHeaderService'))
     .controller('appController', require('./controllers/appController'))
     .directive('appHeader', require('./directives/appHeader'))

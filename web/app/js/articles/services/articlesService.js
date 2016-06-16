@@ -2,41 +2,73 @@
 /*
 *	articlesService
 *	Description
-*	articlesService fetches the articles Page Level Data.
+*	articlesService fetches all Type of  Articles Data
 */
 
 (function() {
-	var articlesService = function($q, $http) {
-		var url = 'app/data/app-header.json';
-		var headerInfo = null;
+	var articlesService = function($q, appService) {
+		var url = 'data/articles.json';
 
-		function getAppHeaderInfo() {
-			var promiseObj = $q.defer();
+		function getAllArticles() {
+			return appService.requestData(url);
+		}
 
-			if (!headerInfo) {
-				$http.get(url).then(function(response) {
-					if (response && response.data) {
-						headerInfo = response.data;
-					} else {
-						headerInfo = null;
+		function getArticleById(articleId) {
+			var defferedObj = $q.defer();
+			appService.requestData(url).then(function(articles) {
+				var foundArticles = articles.filter(function(article) {
+					if (article.id === articleId) {
+						return article;
 					}
-					promiseObj.resolve(headerInfo);
-				}, function(error) {
-					headerInfo = null;
-					promiseObj.reject(error);
 				});
-			} else {
-				promiseObj.resolve(headerInfo);
+
+				if (foundArticles && foundArticles.length > 0) {
+					defferedObj.resolve(foundArticles[0]);
+				} else {
+					defferedObj.resolve();
+				}
+			}, function(rejection) {
+				defferedObj.reject(rejection);
+			});
+
+			return defferedObj.promise;
+		}
+
+		function getArticlesByIds(articleIdsArray) {
+			var defferedObj = $q.defer();
+			if (!(articleIdsArray instanceof Array) || articleIdsArray.length === 0) {
+				defferedObj.resolve();
 			}
 
-			return promiseObj.promise;
+			appService.requestData(url).then(function(articles) {
+				var foundArticles = articles.filter(function(article) {
+					var isMatched = false;
+					articleIdsArray.filter(function(articleId) {
+						if (article.id === articleId) {
+							isMatched = true;
+						}
+					});
+					if (isMatched === true) {
+						return article;
+					}
+				});
+
+				defferedObj.resolve(foundArticles);
+
+			}, function(rejection) {
+				defferedObj.reject(rejection);
+			});
+
+			return defferedObj.promise;
 		}
 
 		return {
-			getAppHeaderInfo: getAppHeaderInfo
+			getAllArticles: getAllArticles,
+			getArticleById: getArticleById,
+			getArticlesByIds: getArticlesByIds
 		};
 	};
 
-	articlesService.$inject = ['$q', '$http'];
+	articlesService.$inject = ['$q', 'appService'];
 	module.exports = articlesService;
 })();

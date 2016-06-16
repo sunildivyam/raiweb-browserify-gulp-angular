@@ -2,41 +2,73 @@
 /*
 *	servicesService
 *	Description
-*	servicesService fetches the Services page Level Data.
+*	servicesService fetches all Type of  Services Data
 */
 
 (function() {
-	var servicesService = function($q, $http) {
-		var url = 'app/data/app-header.json';
-		var headerInfo = null;
+	var servicesService = function($q, appService) {
+		var url = 'data/services.json';
 
-		function getAppHeaderInfo() {
-			var promiseObj = $q.defer();
+		function getAllServices() {
+			return appService.requestData(url);
+		}
 
-			if (!headerInfo) {
-				$http.get(url).then(function(response) {
-					if (response && response.data) {
-						headerInfo = response.data;
-					} else {
-						headerInfo = null;
+		function getServiceById(serviceId) {
+			var defferedObj = $q.defer();
+			appService.requestData(url).then(function(services) {
+				var foundServices = services.filter(function(service) {
+					if (service.id === serviceId) {
+						return service;
 					}
-					promiseObj.resolve(headerInfo);
-				}, function(error) {
-					headerInfo = null;
-					promiseObj.reject(error);
 				});
-			} else {
-				promiseObj.resolve(headerInfo);
+
+				if (foundServices && foundServices.length > 0) {
+					defferedObj.resolve(foundServices[0]);
+				} else {
+					defferedObj.resolve();
+				}
+			}, function(rejection) {
+				defferedObj.reject(rejection);
+			});
+
+			return defferedObj.promise;
+		}
+
+		function getServicesByIds(serviceIdsArray) {
+			var defferedObj = $q.defer();
+			if (!(serviceIdsArray instanceof Array) || serviceIdsArray.length === 0) {
+				defferedObj.resolve();
 			}
 
-			return promiseObj.promise;
+			appService.requestData(url).then(function(services) {
+				var foundServices = services.filter(function(service) {
+					var isMatched = false;
+					serviceIdsArray.filter(function(serviceId) {
+						if (service.id === serviceId) {
+							isMatched = true;
+						}
+					});
+					if (isMatched === true) {
+						return service;
+					}
+				});
+
+				defferedObj.resolve(foundServices);
+
+			}, function(rejection) {
+				defferedObj.reject(rejection);
+			});
+
+			return defferedObj.promise;
 		}
 
 		return {
-			getAppHeaderInfo: getAppHeaderInfo
+			getAllServices: getAllServices,
+			getServiceById: getServiceById,
+			getServicesByIds: getServicesByIds
 		};
 	};
 
-	servicesService.$inject = ['$q', '$http'];
+	servicesService.$inject = ['$q', 'appService'];
 	module.exports = servicesService;
 })();
