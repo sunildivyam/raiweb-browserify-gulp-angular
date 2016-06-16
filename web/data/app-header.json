@@ -81,5 +81,15 @@
 			"description": "Reach us Page Description",
 			"keywords": ["raiweb-contactus", "keyword1", "keyword2", "keyword3", "keyword4"]
 		}
-	]
+	],
+	"mainCarousel": {
+		"slides": ["service1", "service2", "service4", "service6"],
+		"options": {
+			"ride": "carousel",
+			"pause": "hover",
+			"wrap": false,
+			"interval": 4000,
+			"theme": "default"
+		}
+	}
 }

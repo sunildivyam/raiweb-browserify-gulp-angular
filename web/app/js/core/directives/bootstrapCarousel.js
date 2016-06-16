@@ -16,7 +16,7 @@
 				carouselName: '@'
 			},
 			templateUrl: 'core/bootstrap-carousel.html',
-			link: function($scope) {
+			link: function() {
 			}
 		};
 	};
