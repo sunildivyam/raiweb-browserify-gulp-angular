@@ -8,37 +8,66 @@
 */
 
 (function() {
-	var appHeaderService = function($q, $http) {
+	var appHeaderService = function($q, appService) {
 		var url = 'data/app-header.json';
-		var headerInfo = null;
 
 		function getAppHeaderInfo() {
-			var promiseObj = $q.defer();
+			return appService.requestData(url);
+		}
 
-			if (!headerInfo) {
-				$http.get(url).then(function(response) {
-					if (response && response.data) {
-						headerInfo = response.data;
-					} else {
-						headerInfo = null;
-					}
-					promiseObj.resolve(headerInfo);
-				}, function(error) {
-					headerInfo = null;
-					promiseObj.reject(error);
-				});
-			} else {
-				promiseObj.resolve(headerInfo);
-			}
+		function getMainCarousel() {
+			var defferedObj = $q.defer();
+			appService.requestData(url).then(function(appHeaderInfo) {
+				defferedObj.resolve(appHeaderInfo && appHeaderInfo.mainCarousel);
+			}, function(rejection) {
+				defferedObj.reject(rejection);
+			});
 
-			return promiseObj.promise;
+			return defferedObj.promise;
+		}
+
+		function getNavs() {
+			var defferedObj = $q.defer();
+			appService.requestData(url).then(function(appHeaderInfo) {
+				defferedObj.resolve(appHeaderInfo && appHeaderInfo.navs);
+			}, function(rejection) {
+				defferedObj.reject(rejection);
+			});
+
+			return defferedObj.promise;
+		}
+
+		function getApplication() {
+			var defferedObj = $q.defer();
+			appService.requestData(url).then(function(appHeaderInfo) {
+				defferedObj.resolve(appHeaderInfo && appHeaderInfo.application);
+			}, function(rejection) {
+				defferedObj.reject(rejection);
+			});
+
+			return defferedObj.promise;
+		}
+
+		function getLogo() {
+			var defferedObj = $q.defer();
+			appService.requestData(url).then(function(appHeaderInfo) {
+				defferedObj.resolve(appHeaderInfo && appHeaderInfo.logo);
+			}, function(rejection) {
+				defferedObj.reject(rejection);
+			});
+
+			return defferedObj.promise;
 		}
 
 		return {
-			getAppHeaderInfo: getAppHeaderInfo
+			getAppHeaderInfo: getAppHeaderInfo,
+			getMainCarousel: getMainCarousel,
+			getNavs: getNavs,
+			getApplication: getApplication,
+			getLogo: getLogo
 		};
 	};
 
-	appHeaderService.$inject = ['$q', '$http'];
+	appHeaderService.$inject = ['$q', 'appService'];
 	module.exports = appHeaderService;
 })();

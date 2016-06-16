@@ -2,38 +2,45 @@
 /*
 *	appService
 *	Description
-*	appService fetches the Application Level Data.
+*	appService fetches the data for all $http requests and keeps a cache for each.
+*	And supplies data from cache for subsequent requests unless forced call is requested
 */
 
 (function() {
 	var appService = function($q, $http) {
-		var url = 'app/data/app-header.json';
-		var headerInfo = null;
+		var cachedReqs = {};
 
-		function getAppHeaderInfo() {
-			var promiseObj = $q.defer();
-
-			if (!headerInfo) {
+		function getDataFromCache(url) {
+			if (url && typeof url === 'string') {
+				return cachedReqs[url];
+			}
+			return;
+		}
+		function executeDataRequest(url, forced) {
+			var cachedReq = getDataFromCache(url);
+			var defferedObj = $q.defer();
+			if (forced === true || !cachedReq) {
 				$http.get(url).then(function(response) {
 					if (response && response.data) {
-						headerInfo = response.data;
+						cachedReqs[url] = response.data;
+						var resData = angular.copy(response.data);
+						defferedObj.resolve(resData);
 					} else {
-						headerInfo = null;
+						defferedObj.reject(response);
 					}
-					promiseObj.resolve(headerInfo);
-				}, function(error) {
-					headerInfo = null;
-					promiseObj.reject(error);
+				}, function(rejection) {
+					defferedObj.reject(rejection);
 				});
 			} else {
-				promiseObj.resolve(headerInfo);
+				var resData = angular.copy(cachedReq);
+				defferedObj.resolve(resData);
 			}
 
-			return promiseObj.promise;
+			return defferedObj.promise;
 		}
 
 		return {
-			getAppHeaderInfo: getAppHeaderInfo
+			requestData: executeDataRequest
 		};
 	};
 
