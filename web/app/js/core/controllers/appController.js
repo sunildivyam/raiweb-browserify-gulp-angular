@@ -28,6 +28,19 @@
         angular.element($window).bind('resize', function() {
             setCurrentBreakpoint();
         });
+
+        /*
+        *   sets application Information in $rootScope from appHeaderService
+        */
+        appHeaderService.getApplication().then(function(application) {
+            if (application instanceof Object) {
+                $rootScope.application = application;
+            } else {
+                $rootScope.application = null;
+            }
+        }, function() {
+            $rootScope.application = null;
+        });
     };
 
     appController.$inject = ['$rootScope', '$scope', '$window' ,'pageTitleService', 'metaInformationService', 'appHeaderService', 'responsiveDetectionService'];
