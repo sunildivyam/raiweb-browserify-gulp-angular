@@ -18,7 +18,10 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
             <div class="item" ng-repeat="slide in slides" ng-class="{active: $index === 0}">
-                <img src="{{slide.imgUrl}}" alt="{{slide.imgAltText}}">
+                <img
+                    ng-if="slide.images && slide.images.length > 0"
+                    src="{{slide.images[0].url}}"
+                    alt="{{slide.images[0].altternateText}}"/>
                 <div class="carousel-caption">
                   <h3 ng-bind="slide.title"></h3>
                   <p ng-bind-html="slide.description"></p>

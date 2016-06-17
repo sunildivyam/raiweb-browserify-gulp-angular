@@ -2,43 +2,69 @@
 	{
 		"id": "service1",
 		"name": "Service 1",
+		"title": "",
+		"shortDescription": "",
 		"description": "Service 1 Description",
-		"imgUrl": "images/service-1.jpg",
-		"imgAltText": "Service 1 Image Alternate text"
+		"images": [
+			{
+				"url": "images/service-1.jpg",
+				"imgAltText": "Service 1 Image Alternate text"
+			}
+		],
+		"tags": [],
+		"relatedServices": ["service21", "service22"],
+		"relatedArticles": ["article21", "article22"],
+		"relatedTechnologies": ["technology21", "technology21"]
 	},
 	{
 		"id": "service2",
 		"name": "Service 2",
+		"title": "",
+		"shortDescription": "",
 		"description": "Service 2 Description",
-		"imgUrl": "images/service-2.jpg",
-		"imgAltText": "Service 2 Image Alternate text"
+		"images": [
+			{
+				"url": "images/service-2.jpg",
+				"imgAltText": "Service 2 Image Alternate text"
+			}
+		],
+		"tags": [],
+		"relatedServices": ["service21", "service22"],
+		"relatedArticles": ["article21", "article22"],
+		"relatedTechnologies": ["technology21", "technology21"]
 	},
 	{
 		"id": "service3",
 		"name": "Service 3",
+		"title": "",
+		"shortDescription": "",
 		"description": "Service 3 Description",
-		"imgUrl": "images/service-3.jpg",
-		"imgAltText": "Service 3 Image Alternate text"
+		"images": [
+			{
+				"url": "images/service-3.jpg",
+				"imgAltText": "Service 3 Image Alternate text"
+			}
+		],
+		"tags": [],
+		"relatedServices": ["service21", "service22"],
+		"relatedArticles": ["article21", "article22"],
+		"relatedTechnologies": ["technology21", "technology21"]
 	},
 	{
 		"id": "service4",
 		"name": "Service 4",
+		"title": "",
+		"shortDescription": "",
 		"description": "Service 4 Description",
-		"imgUrl": "images/service-4.jpg",
-		"imgAltText": "Service 4 Image Alternate text"
-	},
-	{
-		"id": "service5",
-		"name": "Service 5",
-		"description": "Service 5 Description",
-		"imgUrl": "images/service-5.jpg",
-		"imgAltText": "Service 5 Image Alternate text"
-	},
-	{
-		"id": "service6",
-		"name": "Servi 6",
-		"description": "Svice 6 Description",
-		"imgUrl": "images/servic6.jpg",
-		"imgAltText": "Service 6 Ige Alternate text"
+		"images": [
+			{
+				"url": "images/service-4.jpg",
+				"imgAltText": "Service 4 Image Alternate text"
+			}
+		],
+		"tags": [],
+		"relatedServices": ["service21", "service22"],
+		"relatedArticles": ["article21", "article22"],
+		"relatedTechnologies": ["technology21", "technology21"]
 	}
 ]

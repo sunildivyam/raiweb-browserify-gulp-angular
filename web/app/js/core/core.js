@@ -7,11 +7,6 @@
     *   and other core level configurations if any
     */
 
-    /*  This is $stateProviderRef variable and is used to create All States Dynamically
-    *   from appHeaderService fetched nav data
-    */
-    var $stateProviderRef;
-
     angular.module('raiweb.core', [])
     .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider',
         function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
@@ -23,8 +18,10 @@
                 return $templateCache.get('core/error.html');
             }]
         });
-
-        $stateProviderRef = $stateProvider;
+        /*  This is window.$stateProviderRef variable and is used to create All States Dynamically
+        *   from appHeaderService fetched nav data
+        */
+        window.$stateProviderRef = $stateProvider;
         // Enables html5Mode Urls
         $locationProvider.html5Mode({
             enabled: false,
@@ -38,8 +35,8 @@
     *   Run method of core module, makes the $state and $stateParams Service, available
     *   to the $rootScope Service
     */
-    .run(['$state', '$stateParams', '$rootScope', 'appHeaderService','pageTitleService', 'metaInformationService', '$location',
-        function($state, $stateParams, $rootScope, appHeaderService, pageTitleService, metaInformationService, $location) {
+    .run(['$state', '$stateParams', '$rootScope', 'appHeaderService','pageTitleService', 'metaInformationService', '$location', 'stateHelperService',
+        function($state, $stateParams, $rootScope, appHeaderService, pageTitleService, metaInformationService, $location, stateHelperService) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
 
@@ -62,7 +59,7 @@
             if (data instanceof Object) {
                 setAppHeader(data);
                 // creates states and child states, as well as adds full stateNames to Navs
-                createStates($rootScope.appHeader.navs);
+                stateHelperService.createStates($rootScope.appHeader.navs);
 
                 if (data.application instanceof Object) {
                     setMetaInformation({
@@ -74,7 +71,7 @@
                      setMetaInformation(); //resets meta information
                 }
                 //goto currentState or default state
-                loadCurrentOrDefaultState();
+                stateHelperService.loadCurrentOrDefaultState();
             } else {
                 setMetaInformation();
                 setAppHeader(false);
@@ -84,73 +81,7 @@
             setAppHeader(false);
         });
 
-        /*
-        *   isStateExist is a private method
-        *   Description:
-        *   Checks if stateName is created and exists
-        */
-        function isStateExist(stateName) {
-            var states = $state.get();
-            var isExist = false;
-            if (states instanceof Array) {
-                states.filter(function(state) {
-                    if (state.name === stateName) {
-                        isExist = true;
-                        return;
-                    }
-                });
-            }
-            return isExist;
-        }
 
-        /*
-        *   loadCurrentOrDefaultState is a private method
-        *   Description:
-        *   On page Refresh, if state Url is present, it navigates to corresponding State, else to Home Page
-        */
-        function loadCurrentOrDefaultState() {
-            var currentStateUrl = $location.$$url || '/home';
-            var currentStateName = currentStateUrl.split('/');
-            currentStateName.shift();
-            currentStateName = currentStateName.join('.');
-            if (isStateExist(currentStateName)) {
-                $state.go(currentStateName);
-            }
-        }
-
-        /*
-        *   createStates is a private method
-        *   Description:
-        *   createStates method is a recursive method, which recursively iterates through the navs tree and
-        *   creates the corresponding states.
-        */
-        function createStates(navs, parentStateName) {
-            if (!(navs instanceof Array)) {
-                return;
-            }
-
-            navs.filter(function(navItem) {
-                var stateName = parentStateName ? parentStateName + '.' + navItem.id : navItem.id;
-                /*  pushes full stateName into the navItem of the navs Array.
-                *   So that this can be available to header template
-                */
-                navItem.stateName = stateName;
-                var state = {
-                    name: stateName,
-                    url: '/' + navItem.id,
-                    templateProvider: ['$templateCache', function($templateCache) {
-                        return $templateCache.get(navItem.templateUrl);
-                    }]
-                };
-
-                if (navItem.controllerName) {
-                    state.controller = navItem.controllerName;
-                }
-
-                $stateProviderRef.state(state);
-                createStates(navItem.navs, stateName);
-            });
-        }
 
         /*
         *   setAppHeader is a private method
@@ -162,7 +93,7 @@
             if (headerInfo instanceof Object) {
                 $rootScope.appHeader = {
                     logo: headerInfo.logo || null,
-                    navs: headerInfo.navs || null
+                    navs: headerInfo.items || null
                 };
             } else {
                 $rootScope.appHeader = {
@@ -204,6 +135,7 @@
     angular.module('raiweb.core')
     .factory('requestInterceptor', require('./services/requestInterceptor'))
     .factory('responsiveDetectionService', require('./services/responsiveDetectionService'))
+    .factory('stateHelperService', require('./services/stateHelperService'))
     .factory('appService', require('./services/appService'))
     .factory('pageTitleService', require('./services/pageTitleService'))
     .factory('metaInformationService', require('./services/metaInformationService'))

@@ -7,12 +7,12 @@
 		"keywords": ["raiweb", "keyword1", "keyword2", "keyword3", "keyword4"]
 	},
 	"logo": {
-		"primaryTitle": "Microsoft",
+		"primaryTitle": "Sapient",
 		"secondaryTitle": "India",
 		"tagLine": "Software and Website development Brand",
 		"highCharIndex": 5
 	},
-	"navs": [
+	"items": [
 		{
 			"id": "home",
 			"name": "Home",
@@ -30,7 +30,7 @@
 			"title": "Services Page",
 			"controllerName": "servicesController",
 			"visible": true,
-			"navs": [
+			"items": [
 				{
 					"id": "service1",
 					"name": "Service 1",
@@ -83,7 +83,7 @@
 		}
 	],
 	"mainCarousel": {
-		"slides": ["service1", "service2", "service4", "service6"],
+		"slides": ["service1", "service2", "service4"],
 		"options": {
 			"ride": "carousel",
 			"pause": "hover",
