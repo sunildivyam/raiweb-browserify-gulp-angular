@@ -20,9 +20,8 @@
 	*/
 
 	angular.module('raiweb.services')
-	.factory('servicesService', require('./services/servicesService'))
 	.controller('servicesController', require('./controllers/servicesController'))
-	.directive('servicesHeader', require('./directives/servicesHeader'));
+	.directive('service', require('./directives/service'));
 
 	module.exports = angular.module('raiweb.services');
 })();

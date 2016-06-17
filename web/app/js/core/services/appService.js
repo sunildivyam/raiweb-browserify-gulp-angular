@@ -23,8 +23,7 @@
 				$http.get(url).then(function(response) {
 					if (response && response.data) {
 						cachedReqs[url] = response.data;
-						var resData = angular.copy(response.data);
-						defferedObj.resolve(resData);
+						defferedObj.resolve(cachedReqs[url]);
 					} else {
 						defferedObj.reject(response);
 					}
@@ -32,8 +31,7 @@
 					defferedObj.reject(rejection);
 				});
 			} else {
-				var resData = angular.copy(cachedReq);
-				defferedObj.resolve(resData);
+				defferedObj.resolve(cachedReq);
 			}
 
 			return defferedObj.promise;

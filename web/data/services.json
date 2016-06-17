@@ -8,7 +8,7 @@
 		"images": [
 			{
 				"url": "images/service-1.jpg",
-				"imgAltText": "Service 1 Image Alternate text"
+				"alternateText": "Service 1 Image Alternate text"
 			}
 		],
 		"tags": [],
@@ -25,7 +25,7 @@
 		"images": [
 			{
 				"url": "images/service-2.jpg",
-				"imgAltText": "Service 2 Image Alternate text"
+				"alternateText": "Service 2 Image Alternate text"
 			}
 		],
 		"tags": [],
@@ -42,7 +42,7 @@
 		"images": [
 			{
 				"url": "images/service-3.jpg",
-				"imgAltText": "Service 3 Image Alternate text"
+				"alternateText": "Service 3 Image Alternate text"
 			}
 		],
 		"tags": [],
@@ -59,7 +59,7 @@
 		"images": [
 			{
 				"url": "images/service-4.jpg",
-				"imgAltText": "Service 4 Image Alternate text"
+				"alternateText": "Service 4 Image Alternate text"
 			}
 		],
 		"tags": [],

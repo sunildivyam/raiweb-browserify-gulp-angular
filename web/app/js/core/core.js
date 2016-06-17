@@ -35,11 +35,12 @@
     *   Run method of core module, makes the $state and $stateParams Service, available
     *   to the $rootScope Service
     */
-    .run(['$state', '$stateParams', '$rootScope', 'appHeaderService','pageTitleService', 'metaInformationService', '$location', 'stateHelperService',
-        function($state, $stateParams, $rootScope, appHeaderService, pageTitleService, metaInformationService, $location, stateHelperService) {
+    .run(['$state', '$stateParams', '$rootScope', 'appHeaderService','pageTitleService',
+        'metaInformationService', '$location', 'stateHelperService', '$q', 'servicesService',
+        function($state, $stateParams, $rootScope, appHeaderService, pageTitleService,
+        metaInformationService, $location, stateHelperService, $q, servicesService) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
-
         /*
         *   assigns pageTitleService and metaInformationService to $rootScope
         *   so that both are available in the Head section of HTML page
@@ -48,58 +49,80 @@
         $rootScope.pageTitleService = pageTitleService;
         $rootScope.metaInformationService = metaInformationService;
 
+        // LOADS APPLICATION CONFIGURATIONS
+        var appHeaderDeferedObj = $q.defer();
+        var servicesDeferedObj = $q.defer();
+        var thenFunction = function(data) {
+            return data;
+        };
+        $q.all([
+            appHeaderDeferedObj.promise.then(thenFunction),
+            servicesDeferedObj.promise.then(thenFunction)
+        ]).then(function(promisesData) {
+            loadApplicationConfigurations(promisesData);
+        }, function() {
+            loadApplicationConfigurations(null);
+        });
+
         /*
         *   Description
         *   All States configuration using $stateProviderRef, a reference to the $stateProvider service.
         *   All templates are loaded using $templateCache Service
         *   All States configurations are loaded dynamically using appHeaderService ($http) in JSON format
         */
-
-        appHeaderService.getAppHeaderInfo().then(function(data) {
-            if (data instanceof Object) {
-                setAppHeader(data);
-                // creates states and child states, as well as adds full stateNames to Navs
-                stateHelperService.createStates($rootScope.appHeader.navs);
-
-                if (data.application instanceof Object) {
-                    setMetaInformation({
-                        keywords: data.application.keywords,
-                        description: data.application.description,
-                        title: data.application.shortTitle
-                    });
-                } else {
-                     setMetaInformation(); //resets meta information
-                }
-                //goto currentState or default state
-                stateHelperService.loadCurrentOrDefaultState();
-            } else {
-                setMetaInformation();
-                setAppHeader(false);
+        function loadApplicationConfigurations(promisesData) {
+            var applicationHeader;
+            var services;
+            if (promisesData instanceof Array && promisesData.length >= 2) {
+                applicationHeader = promisesData[0];
+                services = promisesData[1];
             }
-        }, function() {
-            setMetaInformation();
-            setAppHeader(false);
-        });
 
+            configureAppHeader(applicationHeader);
+            configureServices(services);
 
+            //goto currentState or default state
+            stateHelperService.loadCurrentOrDefaultState();
+        }
+
+        function configureServices(services) {
+            if (services instanceof Array) {
+                var parentStateName = 'services';
+                stateHelperService.createStates(services, parentStateName);
+            }
+        }
 
         /*
-        *   setAppHeader is a private method
+        *   configureAppHeader is a private method
         *   It takes an Object param, and sets the various Header Information
         *   If param of anyother type is passed, it resets all the Header Information to null.
         *   So This method can be used to reset Header Information by passing false valueto param
         */
-        function setAppHeader(headerInfo) {
+        function configureAppHeader(headerInfo) {
             if (headerInfo instanceof Object) {
                 $rootScope.appHeader = {
+                    application: headerInfo.application || null,
                     logo: headerInfo.logo || null,
                     navs: headerInfo.items || null
                 };
             } else {
                 $rootScope.appHeader = {
+                    application: null,
                     logo: null,
                     navs: null
                 };
+            }
+
+            stateHelperService.createStates($rootScope.appHeader.navs);
+
+            if (headerInfo.application instanceof Object) {
+                setMetaInformation({
+                    keywords: headerInfo.application.keywords,
+                    description: headerInfo.application.description,
+                    title: headerInfo.application.shortTitle
+                });
+            } else {
+                 setMetaInformation(); //resets meta information
             }
         }
 
@@ -119,6 +142,18 @@
                 pageTitleService.setPageTitle();
             }
         }
+
+        appHeaderService.getAppHeaderInfo().then(function(headerInfo) {
+            appHeaderDeferedObj.resolve(headerInfo);
+        }, function(rejection) {
+            appHeaderDeferedObj.reject(rejection);
+        });
+
+        servicesService.getAllServices().then(function(services) {
+            servicesDeferedObj.resolve(services);
+        }, function(rejection) {
+            servicesDeferedObj.reject(rejection);
+        });
     }]);
 
     /*
@@ -139,6 +174,7 @@
     .factory('appService', require('./services/appService'))
     .factory('pageTitleService', require('./services/pageTitleService'))
     .factory('metaInformationService', require('./services/metaInformationService'))
+    .factory('servicesService', require('./services/servicesService'))
     .factory('technologiesService', require('./services/technologiesService'))
     .factory('appHeaderService', require('./services/appHeaderService'))
     .controller('appController', require('./controllers/appController'))

@@ -80,6 +80,16 @@
 			"visible": true,
 			"description": "Reach us Page Description",
 			"keywords": ["raiweb-contactus", "keyword1", "keyword2", "keyword3", "keyword4"]
+		},
+		{
+			"id": "articles",
+			"name": "Articles",
+			"templateUrl": "articles/landing.html",
+			"title": "Articles Page",
+			"controllerName": "articlesController",
+			"visible": true,
+			"description": "Articles Page Description",
+			"keywords": ["raiweb-articles", "keyword1", "keyword2", "keyword3", "keyword4"]
 		}
 	],
 	"mainCarousel": {

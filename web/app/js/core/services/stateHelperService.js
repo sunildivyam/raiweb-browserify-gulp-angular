@@ -53,7 +53,6 @@
                     /*  pushes full stateName into the statesInfoItem of the items Array.
                     *   So that this can be available to header template or any page for link
                     */
-                    statesInfoItem.stateName = stateName;
                     var state = {
                         name: stateName,
                         url: '/' + statesInfoItem.id
@@ -70,6 +69,7 @@
 
                     window.$stateProviderRef.state(state);
                 }
+                statesInfoItem.stateName = stateName;
                 createStates(statesInfoItem.items, stateName);
             });
         }
