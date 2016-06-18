@@ -8,6 +8,9 @@
 (function() {
 	var servicesController = function($rootScope, $scope, $state,servicesService) {
 		function loadServiceForCurrentState(currentStateName) {
+			$scope.currentService = {};
+			$scope.relatedServices = {};
+
 			if (currentStateName) {
 				servicesService.getServiceByStateName(currentStateName).then(function(service) {
 					if (service instanceof Object) {
@@ -15,9 +18,21 @@
 					} else {
 						$scope.currentService = undefined;
 					}
+					loadRelatedServices(service && service.relatedServices);
 				}, function() {
 					$scope.currentService = undefined;
+					loadRelatedServices(null);
 				});
+			}
+		}
+
+		function loadRelatedServices(serviceIds) {
+			if(serviceIds instanceof Array && serviceIds.length > 0) {
+				servicesService.getServicesByIds(serviceIds).then(function(services) {
+					$scope.relatedServices = services;
+				});
+			} else {
+				$scope.relatedServices = undefined;
 			}
 		}
 

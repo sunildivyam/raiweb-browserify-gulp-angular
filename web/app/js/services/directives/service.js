@@ -4,7 +4,8 @@
 		return {
 			restrict: 'E',
 			scope: {
-				service: "="
+				service: "=",
+				relatedServices: '='
 			},
 			templateUrl: 'services/service.html',
 			link: function() {
