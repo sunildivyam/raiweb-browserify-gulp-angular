@@ -32,6 +32,8 @@
             currentStateName = currentStateName.join('.');
             if (isStateExist(currentStateName)) {
                 $state.go(currentStateName);
+            } else {
+                $state.go('home');
             }
         }
 

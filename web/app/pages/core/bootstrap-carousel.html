@@ -1,6 +1,6 @@
 <div class="container-fluid" ng-class="options.theme">
     <div id="{{carouselName}}"
-        class="carousel slide"
+        class="carousel slide {{carouselName}}"
         data-ride="{{options.ride}}"
         data-interval="{{options.interval}}"
         data-pause="{{options.pause}}"
@@ -20,8 +20,8 @@
             <div class="item" ng-repeat="slide in slides" ng-class="{active: $index === 0}">
                 <img
                     ng-if="slide.images && slide.images.length > 0"
-                    src="{{slide.images[0].url}}"
-                    alt="{{slide.images[0].altternateText}}"/>
+                    ng-src="{{slide.images[0].url}}"
+                    alt="{{slide.images[0].alternateText}}"/>
                 <div class="carousel-caption">
                   <h3 ng-bind="slide.name"></h3>
                   <p ng-bind-html="slide.description"></p>
@@ -30,11 +30,11 @@
         </div>
 
         <!-- Left and right controls -->
-        <a class="left carousel-control" href="#{{carouselName}}" role="button" data-slide="prev">
+        <a class="left carousel-control" href=".{{carouselName}}" role="button" data-slide="prev">
             <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
         </a>
-        <a class="right carousel-control" href="#{{carouselName}}" role="button" data-slide="next">
+        <a class="right carousel-control" href=".{{carouselName}}" role="button" data-slide="next">
             <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>

@@ -19,7 +19,10 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="raiweb-navbar-collapse">
       <ul class="nav navbar-nav">
-        <li ng-class="{'dropdown': nav.navs}" ng-repeat="nav in navs | filter: visible=true" ng-include="'core/nav-tree.html'">
+        <li
+          ng-class="{'dropdown': nav.navs}"
+          ng-repeat="nav in navs | filter: visible=true"
+          ng-include="'core/nav-tree.html'">
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->

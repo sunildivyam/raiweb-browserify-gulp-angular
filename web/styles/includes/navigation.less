@@ -37,6 +37,10 @@
 					color: @mainnav_item_text_color;
 
 					font-size: 16px;
+					&.active {
+						background: @mainnav_item_hover_bg_color;
+						color: @mainnav_item_hover_text_color;
+					}
 				}
 
 				&:hover, &.open {
@@ -66,7 +70,7 @@
 
 							font-size: 14px;
 
-							&:focus, &:hover {
+							&:focus, &:hover, &.active {
 								background: @mainnav_dropdown_item_hover_bg_color;
 								color: @mainnav_dropdown_item_hover_text_color;
 							}

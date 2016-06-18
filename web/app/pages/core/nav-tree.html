@@ -1,6 +1,9 @@
 
-<a ui-sref="{{nav.stateName}}" ng-class="{'dropdown-toggle': nav.items}"
-data-toggle="{{nav.items?'dropdown':''}}" title="{{nav.title}}">
+<a ui-sref="{{nav.stateName}}"
+	ng-class="{'dropdown-toggle': nav.items}"
+	data-toggle="{{nav.items?'dropdown':''}}"
+	title="{{nav.title}}"
+	ui-sref-active="active">
 	<span  ng-bind="nav.name"></span>
 	<span class="caret" ng-if="nav.items"></span>
 </a>
