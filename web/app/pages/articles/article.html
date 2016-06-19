@@ -1,0 +1,26 @@
+<div class="article container-fluid">
+	<div class="row">
+		<section class="related-articles col-lg-2 col-sm-4">
+			<ul>
+				<li ng-repeat="article in relatedArticles">
+					<span  ng-bind="article.name"></span>
+					<span  ng-bind="article.shortDescription"></span>
+				</li>
+			</ul>
+		</section>
+		<section class="article-section col-lg-8 col-sm-8">
+			<h1>{{article.name}}</h1>
+			<p ng-bind-html="article.description"></p>
+		</section>
+		<section class="related-articles-technologies col-lg-2 col-sm-12">
+			<div class="container-fluid">
+				<div class="row">
+					<section class="related-articles col-lg-12 col-sm-6"></section>
+				</div>
+				<div class="row">
+					<section class="related-technologies col-lg-12 col-sm-6"></section>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>

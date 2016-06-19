@@ -36,9 +36,9 @@
     *   to the $rootScope Service
     */
     .run(['$state', '$stateParams', '$rootScope', 'appHeaderService','pageTitleService',
-        'metaInformationService', '$location', 'stateHelperService', '$q', 'servicesService',
+        'metaInformationService', '$location', 'stateHelperService', '$q', 'servicesService', 'articlesService',
         function($state, $stateParams, $rootScope, appHeaderService, pageTitleService,
-        metaInformationService, $location, stateHelperService, $q, servicesService) {
+        metaInformationService, $location, stateHelperService, $q, servicesService, articlesService) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
         /*
@@ -49,46 +49,17 @@
         $rootScope.pageTitleService = pageTitleService;
         $rootScope.metaInformationService = metaInformationService;
 
-        // LOADS APPLICATION CONFIGURATIONS
-        var appHeaderDeferedObj = $q.defer();
-        var servicesDeferedObj = $q.defer();
-        var thenFunction = function(data) {
-            return data;
-        };
-        $q.all([
-            appHeaderDeferedObj.promise.then(thenFunction),
-            servicesDeferedObj.promise.then(thenFunction)
-        ]).then(function(promisesData) {
-            loadApplicationConfigurations(promisesData);
-        }, function() {
-            loadApplicationConfigurations(null);
-        });
-
-        /*
-        *   Description
-        *   All States configuration using $stateProviderRef, a reference to the $stateProvider service.
-        *   All templates are loaded using $templateCache Service
-        *   All States configurations are loaded dynamically using appHeaderService ($http) in JSON format
-        */
-        function loadApplicationConfigurations(promisesData) {
-            var applicationHeader;
-            var services;
-            if (promisesData instanceof Array && promisesData.length >= 2) {
-                applicationHeader = promisesData[0];
-                services = promisesData[1];
-            }
-
-            configureAppHeader(applicationHeader);
-            configureServices(services);
-
-            //goto currentState or default state
-            stateHelperService.loadCurrentOrDefaultState();
-        }
-
         function configureServices(services) {
             if (services instanceof Array) {
                 var parentStateName = 'services';
                 stateHelperService.createStates(services, parentStateName);
+            }
+        }
+
+        function configureArticles(articles) {
+            if (articles instanceof Array) {
+                var parentStateName = 'articles';
+                stateHelperService.createStates(articles, parentStateName);
             }
         }
 
@@ -144,15 +115,29 @@
         }
 
         appHeaderService.getAppHeaderInfo().then(function(headerInfo) {
-            appHeaderDeferedObj.resolve(headerInfo);
-        }, function(rejection) {
-            appHeaderDeferedObj.reject(rejection);
-        });
+            configureAppHeader(headerInfo);
 
-        servicesService.getAllServices().then(function(services) {
-            servicesDeferedObj.resolve(services);
-        }, function(rejection) {
-            servicesDeferedObj.reject(rejection);
+            var servicesPromise = servicesService.getAllServices().then(function(services) {
+                configureServices(services);
+            }, function() {
+                configureServices();
+            });
+
+            var articlesPromise = articlesService.getAllArticles().then(function(articles) {
+                configureArticles(articles);
+            }, function() {
+                configureArticles();
+            });
+
+            $q.all(servicesPromise, articlesPromise).then(function() {
+                //goto currentState or default state
+                stateHelperService.loadCurrentOrDefaultState();
+            }, function() {
+                //goto currentState or default state
+                stateHelperService.loadCurrentOrDefaultState();
+            });
+        }, function() {
+            configureAppHeader();
         });
     }]);
 
@@ -175,6 +160,7 @@
     .factory('pageTitleService', require('./services/pageTitleService'))
     .factory('metaInformationService', require('./services/metaInformationService'))
     .factory('servicesService', require('./services/servicesService'))
+    .factory('articlesService', require('./services/articlesService'))
     .factory('technologiesService', require('./services/technologiesService'))
     .factory('appHeaderService', require('./services/appHeaderService'))
     .controller('appController', require('./controllers/appController'))

@@ -70,7 +70,8 @@
 			"controllerName": "articlesController",
 			"hidden": false,
 			"description": "Articles Page Description",
-			"keywords": ["raiweb-articles", "keyword1", "keyword2", "keyword3", "keyword4"]
+			"keywords": ["raiweb-articles", "keyword1", "keyword2", "keyword3", "keyword4"],
+			"items": ["article1", "article2", "article4", "article5", "article6", "article7"]
 		}
 	],
 	"mainCarousel": {
