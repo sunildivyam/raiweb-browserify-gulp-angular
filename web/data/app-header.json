@@ -19,7 +19,7 @@
 			"templateUrl": "home/landing.html",
 			"title": "Home Page",
 			"controllerName": "homeController",
-			"visible": true,
+			"hidden": false,
 			"description": "Home Page Description",
 			"keywords": ["raiweb-home", "keyword1", "keyword2", "keyword3", "keyword4"]
 		},
@@ -29,27 +29,8 @@
 			"templateUrl": "services/landing.html",
 			"title": "Services Page",
 			"controllerName": "servicesController",
-			"visible": true,
-			"items": [
-				{
-					"id": "service1",
-					"name": "Service 1",
-					"templateUrl": "services/service1.html",
-					"title": "Service 1 Page",
-					"visible": true,
-					"description": "Service 1 Page Description",
-					"keywords": ["raiweb-Service1", "keyword1", "keyword2", "keyword3", "keyword4"]
-				},
-				{
-					"id": "service2",
-					"name": "Service 2",
-					"templateUrl": "services/service2.html",
-					"title": "Service 2 Page",
-					"visible": true,
-					"description": "Service 2 Page Description",
-					"keywords": ["raiweb-Service2", "keyword1", "keyword2", "keyword3", "keyword4"]
-				}
-			]
+			"hidden": false,
+			"items": ["service1", "service2", "service4"]
 		},
 		{
 			"id": "portfolio",
@@ -57,7 +38,7 @@
 			"templateUrl": "portfolio/landing.html",
 			"title": "Portfolio Page",
 			"controllerName": "portfolioController",
-			"visible": true,
+			"hidden": false,
 			"description": "Portfolio Page Description",
 			"keywords": ["raiweb-Portfolio", "keyword1", "keyword2", "keyword3", "keyword4"]
 		},
@@ -67,7 +48,7 @@
 			"templateUrl": "aboutus/landing.html",
 			"title": "About us Page",
 			"controllerName": "aboutusController",
-			"visible": true,
+			"hidden": false,
 			"description": "About us Page Description",
 			"keywords": ["raiweb-aboutus", "keyword1", "keyword2", "keyword3", "keyword4"]
 		},
@@ -77,7 +58,7 @@
 			"templateUrl": "contactus/landing.html",
 			"title": "Reach us Page",
 			"controllerName": "contactusController",
-			"visible": true,
+			"hidden": false,
 			"description": "Reach us Page Description",
 			"keywords": ["raiweb-contactus", "keyword1", "keyword2", "keyword3", "keyword4"]
 		},
@@ -87,7 +68,7 @@
 			"templateUrl": "articles/landing.html",
 			"title": "Articles Page",
 			"controllerName": "articlesController",
-			"visible": true,
+			"hidden": false,
 			"description": "Articles Page Description",
 			"keywords": ["raiweb-articles", "keyword1", "keyword2", "keyword3", "keyword4"]
 		}

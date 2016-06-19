@@ -21,7 +21,7 @@
       <ul class="nav navbar-nav">
         <li
           ng-class="{'dropdown': nav.navs}"
-          ng-repeat="nav in navs | filter: visible=true"
+          ng-repeat="nav in navs | filter: {hidden: '!true'}"
           ng-include="'core/nav-tree.html'">
         </li>
       </ul>

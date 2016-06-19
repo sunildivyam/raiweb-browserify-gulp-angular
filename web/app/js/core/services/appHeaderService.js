@@ -8,11 +8,71 @@
 */
 
 (function() {
-	var appHeaderService = function($q, appService) {
+	var appHeaderService = function($q, appService, servicesService, articlesService) {
 		var url = 'data/app-header.json';
+		var servicesNavName = 'services';
+		var articlesNavName = 'articles';
+
+
+		function prePopulateNavItemWithSubNavs(mainNavItemNames, mainNavItems) {
+			var defferedObj = $q.defer();
+			if (mainNavItems instanceof Array && mainNavItems.length > 0 && mainNavItemNames instanceof Array) {
+				var navPromises = [];
+				mainNavItems.filter(function(navItem) {
+					if (navItem.items instanceof Array && navItem.items.length > 0 && typeof navItem.items[0] === 'string') {
+						mainNavItemNames.filter(function(mainNavItemName) {
+							if (navItem.id === mainNavItemName) {
+								switch(mainNavItemName) {
+									case servicesNavName:
+									var servicesDefered = $q.defer();
+									navPromises.push(servicesDefered.promise.then());
+									servicesService.getServicesByIds(navItem.items).then(function(services) {
+										navItem.items = services;
+										servicesDefered.resolve(services);
+									}, function() {
+										navItem.items = undefined;
+										servicesDefered.reject();
+									});
+									break;
+									case articlesNavName:
+									var articlesDefered = $q.defer();
+									navPromises.push(articlesDefered.promise.then());
+									articlesService.getArticlesByIds(navItem.items).then(function(articles) {
+										navItem.items = articles;
+										articlesDefered.resolve(articles);
+									}, function() {
+										navItem.items = undefined;
+										articlesDefered.reject();
+									});
+								}
+							}
+						});
+					}
+				});
+				$q.all(navPromises).then(function() {
+					defferedObj.resolve();
+				}, function() {
+					defferedObj.reject();
+				});
+			} else {
+				defferedObj.reject();
+			}
+			return defferedObj.promise;
+		}
 
 		function getAppHeaderInfo() {
-			return appService.requestData(url);
+			var defferedObj = $q.defer();
+			appService.requestData(url).then(function(appHeaderInfo) {
+				prePopulateNavItemWithSubNavs([servicesNavName, articlesNavName], appHeaderInfo && appHeaderInfo.items).then(function() {
+					defferedObj.resolve(appHeaderInfo);
+				}, function() {
+					defferedObj.reject();
+				});
+			}, function(rejection) {
+				defferedObj.reject(rejection);
+			});
+
+			return defferedObj.promise;
 		}
 
 		function getMainCarousel() {
@@ -29,7 +89,11 @@
 		function getNavs() {
 			var defferedObj = $q.defer();
 			appService.requestData(url).then(function(appHeaderInfo) {
-				defferedObj.resolve(appHeaderInfo && appHeaderInfo.navs);
+				prePopulateNavItemWithSubNavs([servicesNavName, articlesNavName], appHeaderInfo && appHeaderInfo.items).then(function() {
+					defferedObj.resolve(appHeaderInfo && appHeaderInfo.items);
+				}, function() {
+					defferedObj.reject();
+				});
 			}, function(rejection) {
 				defferedObj.reject(rejection);
 			});
@@ -68,6 +132,6 @@
 		};
 	};
 
-	appHeaderService.$inject = ['$q', 'appService'];
+	appHeaderService.$inject = ['$q', 'appService', 'servicesService', 'articlesService'];
 	module.exports = appHeaderService;
 })();

@@ -8,6 +8,6 @@
 	<span class="caret" ng-if="nav.items"></span>
 </a>
 <ul class="dropdown-menu" ng-if="nav.items">
-	<li ng-repeat="nav in nav.items | filter: visible=true" ng-include="'core/nav-tree.html'" ng-class="{'dropdown dropdown-submenu': nav.items}">
+	<li ng-repeat="nav in nav.items | filter: {hidden: '!true'}" ng-include="'core/nav-tree.html'" ng-class="{'dropdown dropdown-submenu': nav.items}">
 	</li>
 </ul>
