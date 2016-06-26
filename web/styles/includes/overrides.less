@@ -1,6 +1,43 @@
 .raiweb {
-	.container-fluid {
-		padding-left: 0px;
-		padding-right: 0px;
-	}
+    .container-fluid {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .h1, h1 {
+        margin: 0px;
+        padding: 10px;
+        font-size: 18px;
+        border: none;
+    }
+
+    .page-header {
+        position: absolute;
+        display: block;
+        z-index: 1;
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+        border: none;
+
+        .header-title {
+            color: @body-text-white-color;
+            background: @mainnav_item_hover_bg_color;
+        }
+
+        .header-float {
+            display: block;
+            height: 37px;
+
+            background-image: @header-float-bg;
+            background-repeat: no-repeat;
+        }
+    }
+
+
+
+    ui-view {
+        position: relative;
+        display: block;
+    }
 }

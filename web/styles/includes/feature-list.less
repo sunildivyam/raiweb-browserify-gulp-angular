@@ -1,0 +1,77 @@
+@feature-list-sm-icon-width: 40px;
+@feature-list-sm-icon-height: 40px;
+
+@feature-list-sm-color: #000;
+@feature-list-sm-bg-color: rgba(245, 245, 245, 0.5);
+
+@feature-list-sm-hover-color: #f1f1f1;
+@feature-list-sm-bg-hover-color: rgba(10, 10, 10, 0.5);
+
+ul.feature-list {
+	display: block;
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	width: 100%;
+
+	* {
+		margin: 0px;
+		padding: 0px;
+	}
+
+	li.feature {
+		display: block;
+		width: 100%;
+		margin: 20px 0px 10px 0px;
+		border-left: 5px solid rgba(0,0,0,0.5);
+
+		a {
+			display: block;
+			width: 100%;
+			height: auto;
+			padding: 5px;
+
+			color: @feature-list-sm-color;
+			background: @feature-list-sm-bg-color;
+
+			&:hover, &.hover, &:active, &.active {
+				color: @feature-list-sm-hover-color;
+				background: @feature-list-sm-bg-hover-color;
+			}
+
+			.icon {
+				display: block;
+				width: @feature-list-sm-icon-width;
+				height: @feature-list-sm-icon-height;
+				margin-top: -20px;
+
+				background-image: @site-sprite;
+				background-position: 0px 0px;
+			}
+
+			.name {
+				padding-left: 4px;
+
+				font-size: 14px;
+				font-weight: bold;
+
+				.text-overflow();
+			}
+
+			.author, .postedon {
+				.label {
+
+				}
+
+				.value {
+
+				}
+			}
+
+			.short-description {
+				font-size: 12px;
+				line-height: 1.8;
+			}
+		}
+	}
+}

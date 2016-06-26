@@ -1,6 +1,6 @@
 'use strict';
 (function() {
-	var article = function() {
+	var articleDocument = function() {
 		return {
 			restrict: 'E',
 			scope: {
@@ -14,6 +14,6 @@
 		};
 	};
 
-	article.$inject = [];
-	module.exports = article;
+	articleDocument.$inject = [];
+	module.exports = articleDocument;
 })();

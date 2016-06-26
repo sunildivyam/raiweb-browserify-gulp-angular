@@ -21,7 +21,7 @@
 
 	angular.module('raiweb.articles')
 	.controller('articlesController', require('./controllers/articlesController'))
-	.directive('article', require('./directives/article'));
+	.directive('articleDocument', require('./directives/articleDocument'));
 
 	module.exports = angular.module('raiweb.articles');
 })();

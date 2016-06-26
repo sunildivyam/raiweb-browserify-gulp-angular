@@ -1,21 +1,26 @@
 <div class="service container-fluid">
 	<div class="row">
-		<section class="related-services col-lg-2 col-sm-4">
-			<ul>
-				<li ng-repeat="service in relatedServices">
-					<span  ng-bind="service.name"></span>
-					<span  ng-bind="service.shortDescription"></span>
-				</li>
-			</ul>
+		<section class="related-services col-lg-3 col-sm-4">
+			<h2 class="title">Related Services</h2>
+			<feature-list features="relatedServices" mode="sm"></feature-list>
 		</section>
-		<section class="service-section col-lg-8 col-sm-8">
-			<h1>{{service.name}}</h1>
-			<p ng-bind-html="service.description"></p>
+		<section class="service-section col-lg-6 col-sm-8">
+			<article class="service-container">
+				<header>
+					<h1 class="title" ng-bind="service.name"></h1>
+					<summary class="short-description" ng-bind-html="service.shortDescription"></summary>
+					<tags class="tags" keywords="service.tags"></tags>
+				</header>
+				<div ng-bind-html="service.description" class="description"></div>
+			</article>
 		</section>
-		<section class="related-articles-technologies col-lg-2 col-sm-12">
+		<section class="related-articles-technologies col-lg-3 col-sm-12">
 			<div class="container-fluid">
 				<div class="row">
-					<section class="related-articles col-lg-12 col-sm-6"></section>
+					<section class="related-articles col-lg-12 col-sm-6">
+						<h2 class="title">Related Articles</h2>
+						<feature-list features="relatedArticles" mode="sm"></feature-list>
+					</section>
 				</div>
 				<div class="row">
 					<section class="related-technologies col-lg-12 col-sm-6"></section>
