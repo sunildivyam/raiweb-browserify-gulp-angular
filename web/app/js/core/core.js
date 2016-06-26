@@ -167,7 +167,8 @@
     .directive('appHeader', require('./directives/appHeader'))
     .directive('brandLogo', require('./directives/brandLogo'))
     .directive('featureList', require('./directives/featureList'))
-    .directive('bootstrapCarousel', require('./directives/bootstrapCarousel'));
+    .directive('bootstrapCarousel', require('./directives/bootstrapCarousel'))
+    .directive('tags', require('./directives/tags'));
 
     module.exports = angular.module('raiweb.core');
 })();
