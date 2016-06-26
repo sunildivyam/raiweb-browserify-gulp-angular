@@ -13,7 +13,7 @@ module.exports = function(gulp, config) {
 		.pipe(sourcemaps.init())
 		.pipe(rename('index.min.js'))
 		.pipe(uglify())
-		.pipe(sourcemaps.write('app'))
-		.pipe(gulp.dest(config.targetDir));
+		.pipe(sourcemaps.write('./'))
+		.pipe(gulp.dest(config.targetDir + '/'));
 	});
 };

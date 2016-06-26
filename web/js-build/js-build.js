@@ -20,6 +20,7 @@ require('./tasks/less')(gulp, config);
 require('./tasks/uglify')(gulp, config);
 require('./tasks/cleanCss')(gulp, config);
 require('./tasks/clean')(gulp, config);
+require('./tasks/ngdocs')(gulp, config);
 
 gulp.task('buildjs', function() {
 	return runSequence('ngTemplateCache', 'browserify', 'cleanNgTemplateCache');
