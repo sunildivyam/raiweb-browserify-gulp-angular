@@ -17,6 +17,13 @@
             templateProvider: ['$templateCache', function($templateCache) {
                 return $templateCache.get('core/error.html');
             }]
+        })
+        .state({
+            name: 'search',
+            url: 'search?keywords',
+            templateProvider: ['$templateCache', function($templateCache) {
+                return $templateCache.get('core/search-landing.html');
+            }]
         });
         /*  This is window.$stateProviderRef variable and is used to create All States Dynamically
         *   from appHeaderService fetched nav data
@@ -168,7 +175,8 @@
     .directive('brandLogo', require('./directives/brandLogo'))
     .directive('featureList', require('./directives/featureList'))
     .directive('bootstrapCarousel', require('./directives/bootstrapCarousel'))
-    .directive('tags', require('./directives/tags'));
+    .directive('tags', require('./directives/tags'))
+    .directive('globalSearch', require('./directives/globalSearch'));
 
     module.exports = angular.module('raiweb.core');
 })();
