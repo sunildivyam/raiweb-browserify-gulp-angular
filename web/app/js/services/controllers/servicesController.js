@@ -6,7 +6,19 @@
 */
 
 (function() {
-	var servicesController = function($rootScope, $scope, $state,servicesService, articlesService) {
+	var servicesController = function($rootScope, $scope, $state,servicesService, articlesService, metaInformationService, pageTitleService) {
+		function setMetaInfo(service) {
+			if (service instanceof Object) {
+				metaInformationService.setMetaDescription(service.shortDescription);
+				metaInformationService.setMetaKeywords(service.tags);
+				pageTitleService.setPageTitle(service.name);
+			} else {
+				metaInformationService.resetMetaDescription();
+				metaInformationService.resetMetaKeywords();
+				pageTitleService.setPageTitle();
+			}
+		}
+
 		function loadServiceForCurrentState(currentStateName) {
 			$scope.currentService = {};
 			$scope.relatedServices = {};
@@ -19,9 +31,11 @@
 					} else {
 						$scope.currentService = undefined;
 					}
+					setMetaInfo(service);
 					loadRelatedServices(service && service.relatedServices);
 					loadRelatedArticles(service && service.relatedArticles);
 				}, function() {
+					setMetaInfo();
 					$scope.currentService = undefined;
 					loadRelatedServices(null);
 				});
@@ -55,6 +69,6 @@
 		});
 	};
 
-	servicesController.$inject = ['$rootScope', '$scope', '$state', 'servicesService', 'articlesService'];
+	servicesController.$inject = ['$rootScope', '$scope', '$state', 'servicesService', 'articlesService', 'metaInformationService', 'pageTitleService'];
 	module.exports = servicesController;
 })();

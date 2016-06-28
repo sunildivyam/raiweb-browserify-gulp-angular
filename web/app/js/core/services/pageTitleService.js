@@ -5,7 +5,7 @@
 * 	pageTitleService Service Privides Page Titles to the Application
 */
 (function() {
-	var pageTitleService = function() {
+	var pageTitleService = function($rootScope) {
 		var pageTitle = '';
 
 		function getPageTitle() {
@@ -13,10 +13,11 @@
 		}
 
 		function setPageTitle(title) {
+			var application = $rootScope && $rootScope.appHeader && $rootScope.appHeader.application || {};
 			if (typeof title === 'string') {
-				pageTitle = title;
+				pageTitle = [application.shortTitle || '',  title || ''].join(' | ');
 			} else {
-				pageTitle = '';
+				pageTitle = [application.shortTitle || '',  application.title || ''].join(' | ');
 			}
 		}
 
@@ -25,6 +26,6 @@
 			setPageTitle: setPageTitle
 		};
 	};
-
+	pageTitleService.$inject = ['$rootScope'];
 	module.exports = pageTitleService;
 })();

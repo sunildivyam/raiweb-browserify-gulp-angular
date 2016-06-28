@@ -92,16 +92,7 @@
             }
 
             stateHelperService.createStates($rootScope.appHeader.navs);
-
-            if (headerInfo.application instanceof Object) {
-                setMetaInformation({
-                    keywords: headerInfo.application.keywords,
-                    description: headerInfo.application.description,
-                    title: headerInfo.application.shortTitle
-                });
-            } else {
-                 setMetaInformation(); //resets meta information
-            }
+            setMetaInformation(); //resets meta information
         }
 
         /*
@@ -109,16 +100,9 @@
         *   It takes an Object param, and sets the following meta Information of Page:
         *   keywords, description and page Title
         */
-        function setMetaInformation(metaInfo) {
-            if (metaInfo instanceof Object) {
-                metaInformationService.reset();
-                metaInformationService.appendMetaKeywords(metaInfo.keywords);
-                metaInformationService.setMetaDescription(metaInfo.description);
-                pageTitleService.setPageTitle(metaInfo.title);
-            } else {
-                metaInformationService.reset();
-                pageTitleService.setPageTitle();
-            }
+        function setMetaInformation() {
+            metaInformationService.reset();
+            pageTitleService.setPageTitle();
         }
 
         appHeaderService.getAppHeaderInfo().then(function(headerInfo) {

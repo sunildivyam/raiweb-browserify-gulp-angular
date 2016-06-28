@@ -6,10 +6,10 @@
 *	Meta Description to the pages of the Application
 */
 (function() {
-	var metaInformationService = function() {
+	var metaInformationService = function($rootScope) {
 		var metaKeywords = '';
 		var metaDescription = '';
-
+		var application = $rootScope && $rootScope.appHeader && $rootScope.appHeader.application || {};
 		/*
 		*	getMetaKeywords() method returns the Meta Keywords
 		*/
@@ -32,16 +32,11 @@
 		*	any other type of value, resets the metaKeywords
 		*/
 
-		function appendMetaKeywords(keywords) {
-			var lastSeparator = '';
-			if (metaKeywords !== '') {
-				lastSeparator = ',';
-			}
-
+		function setMetaKeywords(keywords) {
 			if (typeof keywords === 'string') {
-				metaKeywords += lastSeparator + keywords;
+				metaKeywords = keywords;
 			} else if(keywords instanceof Array) {
-				metaKeywords += lastSeparator + keywords.join(',');
+				metaKeywords = keywords.join(',');
 			} else {
 				metaKeywords = '';
 			}
@@ -65,7 +60,7 @@
 		*/
 
 		function resetMetaKeywords() {
-			metaKeywords = '';
+			setMetaKeywords(application.keywords);
 		}
 
 		/*
@@ -73,7 +68,7 @@
 		*/
 
 		function resetMetaDescription() {
-			metaDescription = '';
+			setMetaDescription(application.description);
 		}
 
 		/*
@@ -81,20 +76,20 @@
 		*/
 
 		function reset() {
-			metaKeywords = '';
-			metaDescription = '';
+			setMetaKeywords(application.keywords);
+			setMetaDescription(application.description);
 		}
 
 		return {
 			getMetaKeywords: getMetaKeywords,
 			getMetaDescription: getMetaDescription,
-			appendMetaKeywords: appendMetaKeywords,
+			setMetaKeywords: setMetaKeywords,
 			setMetaDescription: setMetaDescription,
 			resetMetaKeywords: resetMetaKeywords,
 			resetMetaDescription: resetMetaDescription,
 			reset: reset
 		};
 	};
-
+	metaInformationService.$inject = ['$rootScope'];
 	module.exports = metaInformationService;
 })();

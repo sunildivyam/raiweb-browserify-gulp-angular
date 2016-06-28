@@ -2,7 +2,7 @@
 	"application": {
 		"name": "raiweb",
 		"title": "raiweb Application title",
-		"shortTitle": "RAIWEB | ",
+		"shortTitle": "RAIWEB",
 		"description": "Application Description",
 		"keywords": ["raiweb", "keyword1", "keyword2", "keyword3", "keyword4"]
 	},
