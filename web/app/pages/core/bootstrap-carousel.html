@@ -19,9 +19,9 @@
         <div class="carousel-inner" role="listbox">
             <div class="item" ng-repeat="slide in slides" ng-class="{active: $index === 0}">
                 <img
-                    ng-if="slide.images && slide.images.length > 0"
-                    ng-src="{{slide.images[0].url}}"
-                    alt="{{slide.images[0].alternateText}}"/>
+                    ng-if="slide.images && slide.images.slideImage"
+                    ng-src="{{slide.images.slideImage.url}}"
+                    alt="{{slide.images.slideImage.alternateText}}"/>
                 <div class="carousel-caption">
                   <h3 ng-bind="slide.name"></h3>
                   <p ng-bind-html="slide.description"></p>

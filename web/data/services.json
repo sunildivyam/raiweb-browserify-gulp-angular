@@ -3,14 +3,22 @@
       "id":"service1",
       "name":"Service 1Service 1Service 1Service 1Service 1Service 1",
       "title":"Service Title 1Service Title 1Service Title 1",
-      "shortDescription":"Service Title 1Short Description . Service Title 1Service Title 1Service Title 1",
+      "shortDescription":"Service Title 1Short Description . Service Title 1Service Title 1Service Title 1Service Title 1Short Description . Service Title 1Service Title 1Service Title 1Service Title 1Short Description . Service Title 1Service Title 1Service Title 1Service Title 1Short Description . Service Title 1Service Title 1Service Title 1",
       "description": "<p><b>Highcharts</b> is a pure JavaScript based charting library meant to enhance web applications by adding interactive charting capability. It supports a wide range of charts. Charts are drawn using SVG in standard browsers like Chrome, Firefox, Safari, Internet Explorer(IE). In legacy IE 6, VML is used to draw the graphics.</p><h2>Features</h2><p>Following are the salient features of Highcharts library.</p><ul class='list'><li><p><b>Compatability</b> - Works seemlessly on all major browsers and mobile platforms like android and iOS.</p></li><li><p><b>Multitouch Support</b> - Supports multitouch on touch screen based platforms like android and iOS.Ideal for iPhone/iPad and android based smart phones/ tablets.</p></li><li><p><b>Free to Use</b> - Open source and is free to use for non-commercial purpose.</p></li><li><p><b>Lightweight</b> - highcharts.js core library with size nearly 35KB, is extremely lightweight library.</p></li><li><p><b>Simple Configurations</b> - Uses json to define various configuration of the charts and very easy to learn and use.</p></li><li><p><b>Dynamic</b> - Allows to modify chart even after chart generation.</p></li><li><p><b>Multiple axes</b> - Not restricted to x, y axis. Supports multiple axis on the charts.</p></li><li><p><b>Configurable tooltips</b> - Tooltip comes when a user hover over any point on a charts. Highcharts provides tooltip inbuilt formatter or callback formatter to control the tooltip programmatically.</p></li><li><p><b>DateTime support</b> - Handle date time specially. Provides numerous inbuilt controls over date wise categories.</p></li><li><p><b>Export</b> - Export chart to PDF/ PNG/ JPG / SVG format by enabling export feature.</p></li><li><p><b>Print</b> - Print chart using web page.</p></li><li><p><b>Zoomablity</b> - Supports zooming chart to view data more precisely.</p></li><li><p><b>External data</b> - Supports loading data dynamically from server. Provides control over data using callback functions.</p></li><li><p><b>Text Rotation</b> - Supports rotation of labels in any direction.</p></li></ul>",
-      "images":[
-         {
+      "images":{
+         "slideImage": {
+            "url":"images/service/service-1.jpg",
+            "alternateText":"Service 1 Image Alternate text"
+         },
+         "thumbImage": {
+            "url":"images/service/service-1.jpg",
+            "alternateText":"Service 1 Image Alternate text"
+         },
+         "bannerImage": {
             "url":"images/service/service-1.jpg",
             "alternateText":"Service 1 Image Alternate text"
          }
-      ],
+      },
       "tags":[
          "tag-keyword1",
          "tag-keyword2",
@@ -58,12 +66,20 @@
       "title":"Service Title 2",
       "shortDescription":"Service 2 Short Description",
       "description":"Service 2 Description",
-      "images":[
-         {
+      "images":{
+         "slideImage": {
+            "url":"images/service/service-2.jpg",
+            "alternateText":"Service 2 Image Alternate text"
+         },
+         "thumbImage": {
+            "url":"images/service/service-2.jpg",
+            "alternateText":"Service 2 Image Alternate text"
+         },
+         "bannerImage": {
             "url":"images/service/service-2.jpg",
             "alternateText":"Service 2 Image Alternate text"
          }
-      ],
+      },
       "tags":[
          "tag-keyword1",
          "tag-keyword2",
@@ -111,12 +127,20 @@
       "title":"Service Title 3",
       "shortDescription":"Service 3 Short Description",
       "description":"Service 3 Description",
-      "images":[
-         {
+      "images":{
+         "slideImage": {
+            "url":"images/service/service-3.jpg",
+            "alternateText":"Service 3 Image Alternate text"
+         },
+         "thumbImage": {
+            "url":"images/service/service-3.jpg",
+            "alternateText":"Service 3 Image Alternate text"
+         },
+         "bannerImage": {
             "url":"images/service/service-3.jpg",
             "alternateText":"Service 3 Image Alternate text"
          }
-      ],
+      },
       "tags":[
          "tag-keyword1",
          "tag-keyword2",
@@ -164,12 +188,20 @@
       "title":"Service Title 4",
       "shortDescription":"Service 4 Short Description",
       "description":"Service 4 Description",
-      "images":[
-         {
+      "images":{
+         "slideImage": {
+            "url":"images/service/service-4.jpg",
+            "alternateText":"Service 4 Image Alternate text"
+         },
+         "thumbImage": {
+            "url":"images/service/service-4.jpg",
+            "alternateText":"Service 4 Image Alternate text"
+         },
+         "bannerImage": {
             "url":"images/service/service-4.jpg",
             "alternateText":"Service 4 Image Alternate text"
          }
-      ],
+      },
       "tags":[
          "tag-keyword1",
          "tag-keyword2",

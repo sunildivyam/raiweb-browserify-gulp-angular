@@ -9,6 +9,12 @@
 				<header>
 					<h1 class="title" ng-bind="service.name"></h1>
 					<summary class="short-description" ng-bind-html="service.shortDescription"></summary>
+					<img
+					ng-if="service.images && service.images.bannerImage"
+					ng-src="{{service.images.bannerImage.url}}"
+					alt="{{service.images.bannerImage.alternateText}}"
+					title="{{service.images.bannerImage.alternateText}}"
+					class="col-xs-6"/>
 					<tags class="tags" keywords="service.tags"></tags>
 				</header>
 				<div ng-bind-html="service.description" class="description"></div>
