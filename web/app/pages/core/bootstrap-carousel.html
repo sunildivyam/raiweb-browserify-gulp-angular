@@ -23,8 +23,8 @@
                     ng-src="{{slide.images.slideImage.url}}"
                     alt="{{slide.images.slideImage.alternateText}}"/>
                 <div class="carousel-caption">
-                  <h3 ng-bind="slide.name"></h3>
-                  <p ng-bind-html="slide.description"></p>
+                  <h3 ng-bind="slide.name" title="{{slide.title}}"></h3>
+                  <p ng-bind-html="slide.shortDescription"></p>
                 </div>
             </div>
         </div>
