@@ -5,7 +5,8 @@
 			restrict: 'E',
 			scope: {
 				article: "=",
-				relatedArticles: '='
+				relatedArticles: '=',
+				relatedServices: '='
 			},
 			templateUrl: 'articles/article.html',
 			link: function() {

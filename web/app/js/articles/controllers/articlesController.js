@@ -6,7 +6,7 @@
 */
 
 (function() {
-	var articlesController = function($rootScope, $scope, $state, articlesService, metaInformationService, pageTitleService) {
+	var articlesController = function($rootScope, $scope, $state, servicesService, articlesService, metaInformationService, pageTitleService) {
 		function setMetaInfo(article) {
 			if (article instanceof Object) {
 				metaInformationService.setMetaDescription(article.shortDescription);
@@ -22,6 +22,7 @@
 		function loadArticleForCurrentState(currentStateName) {
 			$scope.currentArticle = {};
 			$scope.relatedArticles = {};
+			$scope.relatedServices = {};
 
 			if (currentStateName) {
 				articlesService.getArticleByStateName(currentStateName).then(function(article) {
@@ -32,10 +33,12 @@
 					}
 					setMetaInfo(article);
 					loadRelatedArticles(article && article.relatedArticles);
+					loadRelatedServices(article && article.relatedServices);
 				}, function() {
 					setMetaInfo();
 					$scope.currentArticle = undefined;
 					loadRelatedArticles(null);
+					loadRelatedServices(null);
 				});
 			}
 		}
@@ -50,6 +53,16 @@
 			}
 		}
 
+		function loadRelatedServices(serviceIds) {
+			if(serviceIds instanceof Array && serviceIds.length > 0) {
+				servicesService.getServicesByIds(serviceIds).then(function(services) {
+					$scope.relatedServices = services;
+				});
+			} else {
+				$scope.relatedServices = undefined;
+			}
+		}
+
 		$scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState /*, fromParams*/) {
 			if (toState && toState.name && (fromState && fromState.name !== toState.name)) {
 				loadArticleForCurrentState(toState.name);
@@ -57,6 +70,6 @@
 		});
 	};
 
-	articlesController.$inject = ['$rootScope', '$scope', '$state', 'articlesService', 'metaInformationService', 'pageTitleService'];
+	articlesController.$inject = ['$rootScope', '$scope', '$state', 'servicesService', 'articlesService', 'metaInformationService', 'pageTitleService'];
 	module.exports = articlesController;
 })();

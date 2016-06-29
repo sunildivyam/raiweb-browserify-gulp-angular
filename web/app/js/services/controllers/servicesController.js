@@ -38,6 +38,7 @@
 					setMetaInfo();
 					$scope.currentService = undefined;
 					loadRelatedServices(null);
+					loadRelatedArticles(null);
 				});
 			}
 		}
