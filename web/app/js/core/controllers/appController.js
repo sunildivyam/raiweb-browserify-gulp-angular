@@ -41,6 +41,26 @@
         }, function() {
             $rootScope.application = null;
         });
+
+        /*
+        *   returns the Nav Item Info By stateName from the curently created first Level States
+        */
+
+        $scope.getFirstLevelNavItemByStateName = function(stateName) {
+            var navItems = $rootScope && $rootScope.appHeader && $rootScope.appHeader.navs;
+            if (navItems instanceof Array) {
+                var foundItems = navItems.filter(function(item) {
+                    if(item.stateName === stateName) {
+                        return item;
+                    }
+                });
+
+                if (foundItems && foundItems.length) {
+                    return foundItems[0];
+                }
+                return false;
+            }
+        };
     };
 
     appController.$inject = ['$rootScope', '$scope', '$window' ,'pageTitleService', 'metaInformationService', 'appHeaderService', 'responsiveDetectionService'];
