@@ -31,8 +31,8 @@
         window.$stateProviderRef = $stateProvider;
         // Enables html5Mode Urls
         $locationProvider.html5Mode({
-            enabled: false,
-            requireBase: false
+            enabled: true,
+            requireBase: true
         });
 
         $httpProvider.interceptors.push('requestInterceptor');
