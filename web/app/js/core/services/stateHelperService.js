@@ -21,19 +21,39 @@
         }
 
         /*
+        *   Converts query to State Params Object
+        */
+        function convertQueryToStateParamsObj(query) {
+            if (!query && typeof query !== 'string') {
+                return;
+            }
+            var queryParamsArray = query.split('&');
+            var stateParamsObj = {};
+            queryParamsArray.filter(function(param) {
+                var paramValuePair = param.split('=');
+                stateParamsObj[paramValuePair[0]] = paramValuePair[1];
+            });
+            return stateParamsObj;
+        }
+
+        /*
         *   loadCurrentOrDefaultState is a private method
         *   Description:
         *   On page Refresh, if state Url is present, it navigates to corresponding State, else to Home Page
         */
         function loadCurrentOrDefaultState() {
             var currentStateUrl = $location.$$url || '/home';
+            var currentStateUrlAndQuery = currentStateUrl.split('?');
+            var query =  currentStateUrlAndQuery[1];
+            currentStateUrl = currentStateUrlAndQuery[0];
             var currentStateName = currentStateUrl.split('/');
             currentStateName.shift();
             currentStateName = currentStateName.join('.');
+            var stateParamsObj = convertQueryToStateParamsObj(query);
             if (isStateExist(currentStateName)) {
-                $state.go(currentStateName);
+                $state.go(currentStateName, stateParamsObj);
             } else {
-                $state.go('home');
+                $state.go('home', stateParamsObj);
             }
         }
 
