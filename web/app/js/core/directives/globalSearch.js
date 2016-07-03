@@ -4,30 +4,42 @@
 		return {
 			restrict: 'E',
 			scope: {
-				mode: '@mode'
+				mode: '@mode',
+				searchKeywords: '@'
 			},
 			templateUrl: 'core/global-search.html',
 			link: function($scope, element) {
-				$scope.globalSearchKeywords = '';
+				$scope.searchKeywords = '';
 				var $element = $(element);
-				var $searchButton = $element.find('.search-button');
+				var $searchForm = $element.find('form');
 				var $input = $element.find('.global-search-keywords');
 
-				$searchButton.click(function(event) {
+				$searchForm.submit(function(event) {
 					event.preventDefault();
-					var keywords = $scope.globalSearchKeywords.trim();
-					if ($scope.mode !== 'expanded') {
-						$input.toggleClass('open');
+					var keywords = $scope.searchKeywords.trim();
+					if ($scope.mode !== 'expanded' && !keywords) {
+						$input.focus();
 					}
 
 					if (keywords) {
-						if ($scope.mode !== 'expanded') {
-							$scope.globalSearchKeywords = '';
-						}
-
+						$input.removeClass('open');
+						$scope.searchKeywords = '';
 						$state.go('search', {
 							keywords: keywords
 						});
+					}
+				});
+
+				$input.focus(function() {
+					if ($scope.mode !== 'expanded') {
+						$input.addClass('open');
+					}
+				});
+
+				$input.focusout(function() {
+					var keywords = $scope.searchKeywords.trim();
+					if ($scope.mode !== 'expanded' && !keywords) {
+						$input.removeClass('open');
 					}
 				});
 

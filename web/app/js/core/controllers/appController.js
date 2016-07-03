@@ -7,6 +7,7 @@
 
 (function() {
     var appController = function($rootScope, $scope, $window, pageTitleService, metaInformationService, appHeaderService, responsiveDetectionService) {
+        $rootScope.bodyClass = '';
         // sets the currentBreakpoint on page Load.
         setCurrentBreakpoint();
 
@@ -61,6 +62,13 @@
                 return false;
             }
         };
+
+        $rootScope.$on('$stateChangeSuccess', function(event, toState) {
+            if (toState && toState.name) {
+                //Adds Body Class as per currentState
+                $rootScope.bodyClass = toState.name.split('.')[0];
+            }
+        });
     };
 
     appController.$inject = ['$rootScope', '$scope', '$window' ,'pageTitleService', 'metaInformationService', 'appHeaderService', 'responsiveDetectionService'];

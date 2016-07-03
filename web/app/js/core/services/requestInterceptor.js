@@ -43,7 +43,8 @@
                     'status': res.status,
                     'statusText': res.statusText
                 };
-                window.location.hash = '#/error';
+                //window.location.pathname = '/error';
+                $rootScope.$state.go('error');
             } else {
                 $rootScope.errorState = {
                     'status': null,

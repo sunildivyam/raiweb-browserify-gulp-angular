@@ -1,7 +1,9 @@
-<div class="global-search">
-  <input type="text" class="global-search-keywords" placeholder="keywords..." ng-model="globalSearchKeywords"/>
-  <a
-  	href="javascript:void()"
-    class="search-button glyphicon glyphicon-search">
-  </a>
+<div class="global-search" ng-show = "!isSearchPage">
+  <form>
+		<input type="text" class="global-search-keywords" placeholder="keywords..." ng-model="searchKeywords"/>
+		<button type="submit"
+		type="submit"
+		class="search-button glyphicon glyphicon-search" value="">
+		</button>
+	</form>
 </div>

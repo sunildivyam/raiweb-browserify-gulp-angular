@@ -20,10 +20,11 @@
         })
         .state({
             name: 'search',
-            url: 'search?keywords',
+            url: '/search?keywords',
             templateProvider: ['$templateCache', function($templateCache) {
                 return $templateCache.get('core/search-landing.html');
-            }]
+            }],
+            controller: 'searchController'
         });
         /*  This is window.$stateProviderRef variable and is used to create All States Dynamically
         *   from appHeaderService fetched nav data
@@ -154,7 +155,9 @@
     .factory('articlesService', require('./services/articlesService'))
     .factory('technologiesService', require('./services/technologiesService'))
     .factory('appHeaderService', require('./services/appHeaderService'))
+    .factory('searchService', require('./services/searchService'))
     .controller('appController', require('./controllers/appController'))
+    .controller('searchController', require('./controllers/searchController'))
     .directive('appHeader', require('./directives/appHeader'))
     .directive('brandLogo', require('./directives/brandLogo'))
     .directive('featureList', require('./directives/featureList'))
