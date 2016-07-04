@@ -22,8 +22,11 @@
 					}
 
 					if (keywords) {
-						$input.removeClass('open');
-						$scope.searchKeywords = '';
+						if ($scope.mode !== 'expanded') {
+							$input.removeClass('open');
+							$scope.searchKeywords = '';
+						}
+
 						$state.go('search', {
 							keywords: keywords
 						});

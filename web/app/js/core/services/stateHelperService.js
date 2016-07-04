@@ -9,7 +9,7 @@
         function isStateExist(stateName) {
             var states = $state.get();
             var isExist = false;
-            if (states instanceof Array) {
+            if (states instanceof Array && typeof stateName === 'string' && stateName !== '') {
                 states.filter(function(state) {
                     if (state.name === stateName) {
                         isExist = true;

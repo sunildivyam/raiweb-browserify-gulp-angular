@@ -21,7 +21,7 @@
 			var defferedObj = $q.defer();
 			if (forced === true || !cachedReq) {
 				$http.get(url).then(function(response) {
-					if (response && response.data) {
+					if (response && response.data && response.status === 200) {
 						cachedReqs[url] = response.data;
 						defferedObj.resolve(cachedReqs[url]);
 					} else {

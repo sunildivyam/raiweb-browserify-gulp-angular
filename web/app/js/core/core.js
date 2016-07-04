@@ -17,14 +17,6 @@
             templateProvider: ['$templateCache', function($templateCache) {
                 return $templateCache.get('core/error.html');
             }]
-        })
-        .state({
-            name: 'search',
-            url: '/search?keywords',
-            templateProvider: ['$templateCache', function($templateCache) {
-                return $templateCache.get('core/search-landing.html');
-            }],
-            controller: 'searchController'
         });
         /*  This is window.$stateProviderRef variable and is used to create All States Dynamically
         *   from appHeaderService fetched nav data
@@ -122,6 +114,7 @@
             });
 
             $q.all(servicesPromise, articlesPromise).then(function() {
+                createAdditionalStates();
                 //goto currentState or default state
                 stateHelperService.loadCurrentOrDefaultState();
             }, function() {
@@ -131,6 +124,21 @@
         }, function() {
             configureAppHeader();
         });
+
+        /*
+        *   createAdditionalStates is a private method
+        *   Creates Additional States, like search etc.
+        */
+        function createAdditionalStates() {
+            $stateProviderRef.state({
+                name: 'search',
+                url: '/search?keywords',
+                templateProvider: ['$templateCache', function($templateCache) {
+                    return $templateCache.get('core/search-landing.html');
+                }],
+                controller: 'searchController'
+            });
+        }
     }]);
 
     /*
