@@ -26,7 +26,7 @@
 							$input.removeClass('open');
 							$scope.searchKeywords = '';
 						}
-						keywords = decodeURI(keywords);
+
 						$state.go('search', {
 							keywords: keywords
 						}, {
