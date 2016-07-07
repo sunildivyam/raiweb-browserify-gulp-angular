@@ -15,6 +15,22 @@
 			return this.search(regExObj);
 		};
 
+		Array.prototype.matchFeature = function(keywords) {
+			if(!keywords) {
+				return -1;
+			}
+			var matchIndex = -1;
+			this.filter(function(item) {
+				if(typeof item === 'string') {
+					var matchIdx = item.matchFeature(keywords);
+					if (matchIdx >= 0) {
+						matchIndex = matchIdx;
+					}
+				}
+			});
+			return matchIndex;
+		};
+
 		function searchFeatures(keywords) {
 			var deferedObj = $q.defer();
 			var features = [];
@@ -23,7 +39,8 @@
 					if ((service.name && service.name.matchFeature(keywords) >= 0) ||
 						(service.title && service.title.matchFeature(keywords) >= 0) ||
 						(service.shortDescription && service.shortDescription.matchFeature(keywords) >= 0) ||
-						(service.description && service.description.matchFeature(keywords) >= 0)) {
+						(service.description && service.description.matchFeature(keywords) >= 0) ||
+						(service.tags && service.tags.matchFeature(keywords) >= 0)) {
 						features.push(service);
 					}
 				});

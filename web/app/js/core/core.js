@@ -74,18 +74,37 @@
                 $rootScope.appHeader = {
                     application: headerInfo.application || null,
                     logo: headerInfo.logo || null,
-                    navs: headerInfo.items || null
+                    navs: headerInfo.items || null,
+                    footerServices: headerInfo.footerServices || null,
+                    footerArticles: headerInfo.footerArticles || null,
+                    footerTechnologies: headerInfo.footerTechnologies || null,
+                    socialMediaLinks: headerInfo.socialMediaLinks || null,
                 };
             } else {
                 $rootScope.appHeader = {
                     application: null,
                     logo: null,
-                    navs: null
+                    navs: null,
+                    footerServices: null,
+                    footerArticles: null,
+                    footerTechnologies: null,
+                    socialMediaLinks: null,
                 };
             }
 
             stateHelperService.createStates($rootScope.appHeader.navs);
             setMetaInformation(); //resets meta information
+        }
+
+        function configureAppFooter(headerInfo) {
+            if (headerInfo instanceof Object) {
+                servicesService.getServicesByIds(headerInfo.footerServices).then(function(services) {
+                    headerInfo.footerServices = services;
+                });
+                articlesService.getArticlesByIds(headerInfo.footerArticles).then(function(articles) {
+                    headerInfo.footerArticles = articles;
+                });
+            }
         }
 
         /*
@@ -115,6 +134,7 @@
 
             $q.all(servicesPromise, articlesPromise).then(function() {
                 createAdditionalStates();
+                configureAppFooter($rootScope.appHeader);
                 //goto currentState or default state
                 stateHelperService.loadCurrentOrDefaultState();
             }, function() {
@@ -171,7 +191,8 @@
     .directive('featureList', require('./directives/featureList'))
     .directive('bootstrapCarousel', require('./directives/bootstrapCarousel'))
     .directive('tags', require('./directives/tags'))
-    .directive('globalSearch', require('./directives/globalSearch'));
+    .directive('globalSearch', require('./directives/globalSearch'))
+    .directive('appFooter', require('./directives/appFooter'));
 
     module.exports = angular.module('raiweb.core');
 })();

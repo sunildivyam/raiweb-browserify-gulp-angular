@@ -7,7 +7,11 @@
 @feature-list-sm-hover-color: #f1f1f1;
 @feature-list-sm-bg-hover-color: rgba(10, 10, 10, 0.5);
 
-ul.feature-list {
+//link-mode vars
+@feature-list-lk-color: #c1c1c1;
+@feature-list-lk-hover-color: #72baf9;
+
+ul.feature-list, ul.feature-list.small-thumb-mode {
 	display: block;
 	margin: 0px;
 	padding: 0px;
@@ -46,7 +50,7 @@ ul.feature-list {
 				margin-top: -20px;
 
 				background-image: @site-sprite;
-				background-position: 0px 0px;
+				background-position: -222px 0px;
 			}
 
 			.name {
@@ -71,6 +75,44 @@ ul.feature-list {
 			.short-description {
 				font-size: 12px;
 				line-height: 1.8;
+			}
+		}
+	}
+}
+
+ul.feature-list.link-mode {
+	li.feature {
+		display: inline-block;
+		width: auto;
+		margin: 0px;
+		padding: 0px;
+
+		a, a:visited, a:focus {
+			color: @feature-list-lk-color;
+			background: transparent;
+			text-decoration: none;
+
+			&:hover, &.hover, &:active, &.active {
+				color: @feature-list-lk-hover-color;
+				background: transparent;
+				text-decoration: none;
+			}
+
+			&.name {
+				display: inline;
+				font-size: 12px;
+				font-weight: normal;
+				text-overflow: initial;
+				white-space: normal;
+				overflow: visible;
+			}
+			.icon {
+				display: inline-block;
+			    margin-right: 5px;
+			    width: 20px;
+			    height: 20px;
+			    vertical-align: bottom;
+			    background-position: -24px -364px;
 			}
 		}
 	}

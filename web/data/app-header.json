@@ -4,7 +4,9 @@
 		"title": "raiweb Application title",
 		"shortTitle": "RAIWEB",
 		"description": "Application Description",
-		"keywords": ["raiweb", "keyword1", "keyword2", "keyword3", "keyword4"]
+		"keywords": ["raiweb", "keyword1", "keyword2", "keyword3", "keyword4"],
+		"copyrightsText": "copyrights@allrights reserved",
+		"credits": "developed & maintained by xyz India Ltd."
 	},
 	"logo": {
 		"primaryTitle": "Sapient",
@@ -83,5 +85,34 @@
 			"interval": 4000,
 			"theme": "default"
 		}
-	}
+	},
+	"footerServices": ["service1", "service2", "service4"],
+	"footerArticles": ["article1", "article2", "article4"],
+	"footerTechnologies": ["technology1", "technology2", "technology4"],
+	"socialMediaLinks": [
+		{
+			"id":"gmail",
+			"name":"Gmail",
+			"title":"gmail",
+			"url": "http://gmail.com"
+		},
+		{
+			"id":"facebook",
+			"name":"Facebook",
+			"title":"facebook",
+			"url": "http://facebook.com"
+		},
+		{
+			"id":"twitter",
+			"name":"Twitter",
+			"title":"twitter",
+			"url": "http://twitter.com"
+		},
+		{
+			"id":"linkedin",
+			"name":"LinkedIn",
+			"title":"linkedin",
+			"url": "http://linkedin.com"
+		}
+	]
 }

@@ -27,7 +27,15 @@
 
     <global-search></global-search>
     <ui-view ng-animate="'view'"></ui-view>
-
+    <app-footer
+      logo = "appHeader.logo"
+      services = "appHeader.footerServices"
+      articles = "appHeader.footerArticles"
+      technologies = "appHeader.footerTechnologies"
+      social-media-links="appHeader.socialMediaLinks"
+      credits = "{{appHeader.application.credits}}"
+      copyrights-text = "{{appHeader.application.copyrightsText}}">
+    </app-footer>
     <script src="index.js"></script>
   </body>
 </html>

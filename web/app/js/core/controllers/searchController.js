@@ -13,8 +13,8 @@
 
         $scope.$on('$stateChangeSuccess', function(event, toState, toParams) {
             if (toParams) {
-                $scope.searchKeywords = toParams.keywords;
-                searchService.searchFeatures(toParams.keywords, featureName).then(function(features) {
+                $scope.searchKeywords = decodeURI(toParams.keywords);
+                searchService.searchFeatures($scope.searchKeywords, featureName).then(function(features) {
                     $scope.foundFeatures = features;
                 });
             }
