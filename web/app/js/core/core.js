@@ -133,7 +133,6 @@
             });
 
             $q.all(servicesPromise, articlesPromise).then(function() {
-                createAdditionalStates();
                 configureAppFooter($rootScope.appHeader);
                 //goto currentState or default state
                 stateHelperService.loadCurrentOrDefaultState();
@@ -144,21 +143,6 @@
         }, function() {
             configureAppHeader();
         });
-
-        /*
-        *   createAdditionalStates is a private method
-        *   Creates Additional States, like search etc.
-        */
-        function createAdditionalStates() {
-            $stateProviderRef.state({
-                name: 'search',
-                url: '/search?keywords',
-                templateProvider: ['$templateCache', function($templateCache) {
-                    return $templateCache.get('core/search-landing.html');
-                }],
-                controller: 'searchController'
-            });
-        }
     }]);
 
     /*
@@ -183,15 +167,12 @@
     .factory('articlesService', require('./services/articlesService'))
     .factory('technologiesService', require('./services/technologiesService'))
     .factory('appHeaderService', require('./services/appHeaderService'))
-    .factory('searchService', require('./services/searchService'))
     .controller('appController', require('./controllers/appController'))
-    .controller('searchController', require('./controllers/searchController'))
     .directive('appHeader', require('./directives/appHeader'))
     .directive('brandLogo', require('./directives/brandLogo'))
     .directive('featureList', require('./directives/featureList'))
     .directive('bootstrapCarousel', require('./directives/bootstrapCarousel'))
     .directive('tags', require('./directives/tags'))
-    .directive('globalSearch', require('./directives/globalSearch'))
     .directive('appFooter', require('./directives/appFooter'));
 
     module.exports = angular.module('raiweb.core');

@@ -23,6 +23,7 @@ angular.module('raiweb', [
 	require('./js/aboutus/aboutus').name,
 	require('./js/contactus/contactus').name,
 	require('./js/team/team').name,
-	require('./js/articles/articles').name
+	require('./js/articles/articles').name,
+	require('./js/search/search').name
 ]);
 

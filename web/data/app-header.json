@@ -74,6 +74,17 @@
 			"description": "Articles Page Description",
 			"keywords": ["raiweb-articles", "keyword1", "keyword2", "keyword3", "keyword4"],
 			"items": ["article1", "article2", "article4", "article5", "article6", "article7"]
+		},
+		{
+			"id": "search",
+			"name": "Search",
+			"templateUrl": "search/landing.html",
+			"title": "Search Page",
+			"controllerName": "searchController",
+			"queryParams": ["keywords"],
+			"hidden": true,
+			"description": "Search Page allows the user to search across site, the services, articles, technologies, tags by using keyword or keywords",
+			"keywords": ["raiweb-search", "keyword1", "keyword2", "keyword3", "keyword4"]
 		}
 	],
 	"mainCarousel": {

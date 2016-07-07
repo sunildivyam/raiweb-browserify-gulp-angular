@@ -89,6 +89,11 @@
                         state.controller = statesInfoItem.controllerName;
                     }
 
+                    if (statesInfoItem.queryParams instanceof Array) {
+                        var params = statesInfoItem.queryParams.join('&');
+                        state.url += '?' + params;
+                    }
+
                     window.$stateProviderRef.state(state);
                 }
                 statesInfoItem.stateName = stateName;

@@ -7,7 +7,7 @@
 				mode: '@mode',
 				searchKeywords: '@'
 			},
-			templateUrl: 'core/global-search.html',
+			templateUrl: 'search/global-search.html',
 			link: function($scope, element) {
 				$scope.searchKeywords = '';
 				var $element = $(element);

@@ -6,13 +6,25 @@
 */
 
 (function() {
-    var searchController = function($rootScope, $scope, searchService) {
+    var searchController = function($rootScope, $scope, searchService, metaInformationService, pageTitleService) {
         var featureName = 'All';
         $scope.searchKeywords;
         $scope.foundFeatures;
 
+        function setMetaInfo(searchNav) {
+            if (searchNav instanceof Object) {
+                metaInformationService.setMetaDescription(searchNav.description);
+                metaInformationService.setMetaKeywords(searchNav.keywords);
+                pageTitleService.setPageTitle(searchNav.title);
+            } else {
+                metaInformationService.resetMetaDescription();
+                metaInformationService.resetMetaKeywords();
+                pageTitleService.setPageTitle();
+            }
+        }
+
         $scope.$on('$stateChangeSuccess', function(event, toState, toParams) {
-            if (toParams) {
+            if (toState && toState.name && toParams) {
 
                 // Ensures keywords Param decoding and disallow double encoding of space and % characters in Params
                 $rootScope.$state.go('.', {
@@ -27,10 +39,13 @@
                 searchService.searchFeatures($scope.searchKeywords, featureName).then(function(features) {
                     $scope.foundFeatures = features;
                 });
+
+                var searchNav = $scope.getFirstLevelNavItemByStateName(toState.name);
+                setMetaInfo(searchNav);
             }
         });
     };
 
-    searchController.$inject = ['$rootScope', '$scope', 'searchService'];
+    searchController.$inject = ['$rootScope', '$scope', 'searchService', 'metaInformationService', 'pageTitleService'];
     module.exports = searchController;
 })();
