@@ -6,7 +6,7 @@
 */
 
 (function() {
-	var articlesController = function($rootScope, $scope, $state, servicesService, articlesService, metaInformationService, pageTitleService) {
+	var articlesController = function($rootScope, $scope, $state, servicesService, articlesService, technologiesService, metaInformationService, pageTitleService) {
 		function setMetaInfo(article) {
 			if (article instanceof Object) {
 				metaInformationService.setMetaDescription(article.shortDescription);
@@ -23,6 +23,7 @@
 			$scope.currentArticle = {};
 			$scope.relatedArticles = {};
 			$scope.relatedServices = {};
+			$scope.relatedTechnologies = {};
 
 			if (currentStateName) {
 				articlesService.getArticleByStateName(currentStateName).then(function(article) {
@@ -34,11 +35,13 @@
 					setMetaInfo(article);
 					loadRelatedArticles(article && article.relatedArticles);
 					loadRelatedServices(article && article.relatedServices);
+					loadRelatedTechnologies(article && article.relatedTechnologies);
 				}, function() {
 					setMetaInfo();
 					$scope.currentArticle = undefined;
 					loadRelatedArticles(null);
 					loadRelatedServices(null);
+					loadRelatedTechnologies(null);
 				});
 			}
 		}
@@ -63,6 +66,16 @@
 			}
 		}
 
+		function loadRelatedTechnologies(technologyIds) {
+			if(technologyIds instanceof Array && technologyIds.length > 0) {
+				technologiesService.getTechnologiesByIds(technologyIds).then(function(technologies) {
+					$scope.relatedTechnologies = technologies;
+				});
+			} else {
+				$scope.relatedTechnologies = undefined;
+			}
+		}
+
 		$scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState /*, fromParams*/) {
 			if (toState && toState.name && (fromState && fromState.name !== toState.name)) {
 				loadArticleForCurrentState(toState.name);
@@ -70,6 +83,6 @@
 		});
 	};
 
-	articlesController.$inject = ['$rootScope', '$scope', '$state', 'servicesService', 'articlesService', 'metaInformationService', 'pageTitleService'];
+	articlesController.$inject = ['$rootScope', '$scope', '$state', 'servicesService', 'articlesService', 'technologiesService', 'metaInformationService', 'pageTitleService'];
 	module.exports = articlesController;
 })();

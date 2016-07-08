@@ -6,7 +6,8 @@
 			scope: {
 				service: "=",
 				relatedServices: '=',
-				relatedArticles: '='
+				relatedArticles: '=',
+				relatedTechnologies: '='
 			},
 			templateUrl: 'services/service.html',
 			link: function() {
