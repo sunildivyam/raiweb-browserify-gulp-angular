@@ -23,6 +23,7 @@
 			if (toState && toState.name && (fromState && fromState.name !== toState.name)) {
 				var aboutusNav = $scope.getFirstLevelNavItemByStateName(toState.name);
 				setMetaInfo(aboutusNav);
+				$scope.aboutus = aboutusNav;
 			}
 		});
 	};
