@@ -13,7 +13,7 @@
  */
 
 (function() {
-    var appFooter = function($rootScope, $timeout) {
+    var appFooter = function() {
         return {
             restrict: 'E',
             replace: true,
@@ -27,12 +27,12 @@
                 copyrightsText: '@'
             },
             templateUrl: 'core/app-footer.html',
-            link: function($scope) {
+            link: function() {
 
             }
         };
     };
 
-    appFooter.$inject = ['$rootScope', '$timeout'];
+    appFooter.$inject = [];
     module.exports = appFooter;
 })();

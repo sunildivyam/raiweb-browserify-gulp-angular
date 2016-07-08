@@ -85,7 +85,7 @@
                     footerServices: headerInfo.footerServices || null,
                     footerArticles: headerInfo.footerArticles || null,
                     footerTechnologies: headerInfo.footerTechnologies || null,
-                    socialMediaLinks: headerInfo.socialMediaLinks || null,
+                    socialMediaLinks: headerInfo.socialMediaLinks || null
                 };
             } else {
                 $rootScope.appHeader = {
@@ -95,7 +95,7 @@
                     footerServices: null,
                     footerArticles: null,
                     footerTechnologies: null,
-                    socialMediaLinks: null,
+                    socialMediaLinks: null
                 };
             }
 
