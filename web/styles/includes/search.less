@@ -51,10 +51,16 @@
             position: relative;
             display: block;
             margin-top: 30px;
+            height: 50px;
+            padding-top: 10px;
+
+            .border-radius(10px);
 
             .global-search-keywords {
                 &.open {
                     width: 100%;
+                    padding-left: 10px;
+                    padding-right: 10px;
                 }
             }
 
@@ -74,6 +80,8 @@
     }
 
     .results-title {
-        font-size: 18px;
+        margin-top: 70px;
+        font-size: @font-size-xs;
+        border-left: 10px solid;
     }
 }
