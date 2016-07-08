@@ -5,7 +5,7 @@
 * 	searchService Service Search Functionality
 */
 (function() {
-	var searchService = function($q, servicesService, articlesService) {
+	var searchService = function($q, servicesService, articlesService, technologiesService) {
 		String.prototype.matchFeature = function(keywords) {
 			if (!keywords) {
 				return -1;
@@ -57,7 +57,18 @@
 				});
 			});
 
-			$q.all([servicesPromise, articlesPromise]).then(function() {
+			var technologiesPromise = technologiesService.getAllTechnologies().then(function(technologies) {
+				technologies.filter(function(technology) {
+					if ((technology.name && technology.name.matchFeature(keywords) >= 0) ||
+						(technology.title && technology.title.matchFeature(keywords) >= 0) ||
+						(technology.shortDescription && technology.shortDescription.matchFeature(keywords) >= 0) ||
+						(technology.description && technology.description.matchFeature(keywords) >= 0)) {
+						features.push(technology);
+					}
+				});
+			});
+
+			$q.all([servicesPromise, articlesPromise, technologiesPromise]).then(function() {
 				deferedObj.resolve(features);
 			});
 
@@ -68,6 +79,6 @@
 			searchFeatures: searchFeatures
 		};
 	};
-	searchService.$inject = ['$q', 'servicesService', 'articlesService'];
+	searchService.$inject = ['$q', 'servicesService', 'articlesService', 'technologiesService'];
 	module.exports = searchService;
 })();
