@@ -111,6 +111,9 @@
                 articlesService.getArticlesByIds(headerInfo.footerArticles).then(function(articles) {
                     headerInfo.footerArticles = articles;
                 });
+                technologiesService.getTechnologiesByIds(headerInfo.footerTechnologies).then(function(technologies) {
+                    headerInfo.footerTechnologies = technologies;
+                });
             }
         }
 
