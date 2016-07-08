@@ -8,10 +8,11 @@
 */
 
 (function() {
-	var appHeaderService = function($q, appService, servicesService, articlesService) {
+	var appHeaderService = function($q, appService, servicesService, articlesService, technologiesService) {
 		var url = 'data/app-header.json';
 		var servicesNavName = 'services';
 		var articlesNavName = 'articles';
+		var technologiesNavName = 'technologies';
 
 
 		function prePopulateNavItemWithSubNavs(mainNavItemNames, mainNavItems) {
@@ -44,6 +45,18 @@
 										navItem.items = undefined;
 										articlesDefered.reject();
 									});
+									break;
+									case technologiesNavName:
+									var technologiesDefered = $q.defer();
+									navPromises.push(technologiesDefered.promise.then());
+									technologiesService.getTechnologiesByIds(navItem.items).then(function(technologies) {
+										navItem.items = technologies;
+										technologiesDefered.resolve(technologies);
+									}, function() {
+										navItem.items = undefined;
+										technologiesDefered.reject();
+									});
+									break;
 								}
 							}
 						});
@@ -63,7 +76,7 @@
 		function getAppHeaderInfo() {
 			var defferedObj = $q.defer();
 			appService.requestData(url).then(function(appHeaderInfo) {
-				prePopulateNavItemWithSubNavs([servicesNavName, articlesNavName], appHeaderInfo && appHeaderInfo.items).then(function() {
+				prePopulateNavItemWithSubNavs([servicesNavName, articlesNavName, technologiesNavName], appHeaderInfo && appHeaderInfo.items).then(function() {
 					defferedObj.resolve(appHeaderInfo);
 				}, function() {
 					defferedObj.reject();
@@ -89,7 +102,7 @@
 		function getNavs() {
 			var defferedObj = $q.defer();
 			appService.requestData(url).then(function(appHeaderInfo) {
-				prePopulateNavItemWithSubNavs([servicesNavName, articlesNavName], appHeaderInfo && appHeaderInfo.items).then(function() {
+				prePopulateNavItemWithSubNavs([servicesNavName, articlesNavName, technologiesNavName], appHeaderInfo && appHeaderInfo.items).then(function() {
 					defferedObj.resolve(appHeaderInfo && appHeaderInfo.items);
 				}, function() {
 					defferedObj.reject();
@@ -132,6 +145,6 @@
 		};
 	};
 
-	appHeaderService.$inject = ['$q', 'appService', 'servicesService', 'articlesService'];
+	appHeaderService.$inject = ['$q', 'appService', 'servicesService', 'articlesService', 'technologiesService'];
 	module.exports = appHeaderService;
 })();

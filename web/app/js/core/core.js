@@ -36,9 +36,9 @@
     *   to the $rootScope Service
     */
     .run(['$state', '$stateParams', '$rootScope', 'appHeaderService','pageTitleService',
-        'metaInformationService', '$location', 'stateHelperService', '$q', 'servicesService', 'articlesService',
+        'metaInformationService', '$location', 'stateHelperService', '$q', 'servicesService', 'articlesService', 'technologiesService',
         function($state, $stateParams, $rootScope, appHeaderService, pageTitleService,
-        metaInformationService, $location, stateHelperService, $q, servicesService, articlesService) {
+        metaInformationService, $location, stateHelperService, $q, servicesService, articlesService, technologiesService) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
         /*
@@ -60,6 +60,13 @@
             if (articles instanceof Array) {
                 var parentStateName = 'articles';
                 stateHelperService.createStates(articles, parentStateName);
+            }
+        }
+
+        function configureTechnologies(technologies) {
+            if (technologies instanceof Array) {
+                var parentStateName = 'technologies';
+                stateHelperService.createStates(technologies, parentStateName);
             }
         }
 
@@ -132,7 +139,13 @@
                 configureArticles();
             });
 
-            $q.all(servicesPromise, articlesPromise).then(function() {
+            var technologiesPromise = technologiesService.getAllTechnologies().then(function(technologies) {
+                configureTechnologies(technologies);
+            }, function() {
+                configureTechnologies();
+            });
+
+            $q.all(servicesPromise, articlesPromise, technologiesPromise).then(function() {
                 configureAppFooter($rootScope.appHeader);
                 //goto currentState or default state
                 stateHelperService.loadCurrentOrDefaultState();

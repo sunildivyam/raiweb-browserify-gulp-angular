@@ -76,6 +76,17 @@
 			"items": ["article1", "article2", "article4", "article5", "article6", "article7"]
 		},
 		{
+			"id": "technologies",
+			"name": "Technologies",
+			"templateUrl": "technologies/landing.html",
+			"title": "Technologies Page",
+			"controllerName": "technologiesController",
+			"hidden": false,
+			"description": "Technologies Page Description",
+			"keywords": ["raiweb-technologies", "keyword1", "keyword2", "keyword3", "keyword4"],
+			"items": ["technology1", "technology2", "technology4", "technology5", "technology6", "technology7"]
+		},
+		{
 			"id": "search",
 			"name": "Search",
 			"templateUrl": "search/landing.html",
