@@ -21,8 +21,7 @@
 
 	angular.module('raiweb.home')
 	.factory('homeService', require('./services/homeService'))
-	.controller('homeController', require('./controllers/homeController'))
-	.directive('homeHeader', require('./directives/homeHeader'));
+	.controller('homeController', require('./controllers/homeController'));
 
 	module.exports = angular.module('raiweb.home');
 })();

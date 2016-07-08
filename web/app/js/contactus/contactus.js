@@ -21,8 +21,7 @@
 
 	angular.module('raiweb.contactus')
 	.factory('contactusService', require('./services/contactusService'))
-	.controller('contactusController', require('./controllers/contactusController'))
-	.directive('contactusHeader', require('./directives/contactusHeader'));
+	.controller('contactusController', require('./controllers/contactusController'));
 
 	module.exports = angular.module('raiweb.contactus');
 })();

@@ -21,8 +21,7 @@
 
 	angular.module('raiweb.portfolio')
 	.factory('portfolioService', require('./services/portfolioService'))
-	.controller('portfolioController', require('./controllers/portfolioController'))
-	.directive('portfolioHeader', require('./directives/portfolioHeader'));
+	.controller('portfolioController', require('./controllers/portfolioController'));
 
 	module.exports = angular.module('raiweb.portfolio');
 })();

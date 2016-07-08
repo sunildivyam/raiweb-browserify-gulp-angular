@@ -21,8 +21,7 @@
 
 	angular.module('raiweb.team')
 	.factory('teamService', require('./services/teamService'))
-	.controller('teamController', require('./controllers/teamController'))
-	.directive('teamHeader', require('./directives/teamHeader'));
+	.controller('teamController', require('./controllers/teamController'));
 
 	module.exports = angular.module('raiweb.team');
 })();

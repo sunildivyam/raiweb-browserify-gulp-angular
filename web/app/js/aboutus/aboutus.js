@@ -21,8 +21,7 @@
 
 	angular.module('raiweb.aboutus')
 	.factory('aboutusService', require('./services/aboutusService'))
-	.controller('aboutusController', require('./controllers/aboutusController'))
-	.directive('aboutusHeader', require('./directives/aboutusHeader'));
+	.controller('aboutusController', require('./controllers/aboutusController'));
 
 	module.exports = angular.module('raiweb.aboutus');
 })();
